@@ -7,7 +7,7 @@ flake8:
   script:
     - python -m pip install --upgrade pip
     - pip install flake8 flake8-import-order flake8-quotes pep8-naming
-    - flake8 .
+    - flake8 . --inline-quotes="double"
   only:
     - main
 
