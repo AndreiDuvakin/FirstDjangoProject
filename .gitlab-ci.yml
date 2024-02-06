@@ -6,7 +6,13 @@ flake8:
   image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
     - python -m pip install --upgrade pip
-    - pip install -r requirements/prod.txt
-    - flake8 --verbose .
+    - pip install flake8 flake8-import-order flake8-quotes flake8-pep8-naming
+    - flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --import-order-style=google --max-line-length=88
   only:
     - main
+
+black_check:
+  stage: test
+  script:
+    - pip install black
+    - black --check .
