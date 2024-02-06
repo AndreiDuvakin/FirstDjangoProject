@@ -1,5 +1,6 @@
 stages:
   - linting
+  - black
 
 flake8:
   stage: linting
@@ -12,6 +13,8 @@ flake8:
     - main
 
 black_check:
-  stage: linting
+  stage: black
   script:
+    - python -m pip install --upgrade pip
+    - pip install black
     - black --check . --line-length 80
