@@ -12,7 +12,7 @@ flake8:
     - main
 
 black_check:
-  stage: test
+  stage: linting
   script:
     - pip install black
     - black --check .
