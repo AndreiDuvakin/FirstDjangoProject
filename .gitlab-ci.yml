@@ -14,5 +14,6 @@ flake8:
 black_check:
   stage: linting
   script:
+    - python -m pip install --upgrade pip
     - pip install black
     - black --check .
