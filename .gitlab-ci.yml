@@ -1,0 +1,10 @@
+stages:
+  - test
+
+flake8:
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 .
+  only:
+    - main
