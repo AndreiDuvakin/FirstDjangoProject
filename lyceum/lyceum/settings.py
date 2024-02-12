@@ -1,6 +1,6 @@
+import json
 import os
 from pathlib import Path
-import json
 
 from dotenv import load_dotenv
 
@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "debug_toolbar"
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -30,12 +30,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware"
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-INTERNALS_IPS = [
-    '127.0.0.0'
-]
+INTERNALS_IPS = ["127.0.0.0"]
 
 ROOT_URLCONF = "lyceum.urls"
 
@@ -67,19 +65,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth"
-                ".password_validation.UserAttributeSimilarityValidator",
+        ".password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib"
-                ".auth.password_validation.MinimumLengthValidator",
+        ".auth.password_validation.MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib"
-                ".auth.password_validation.CommonPasswordValidator",
+        ".auth.password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib"
-                ".auth.password_validation.NumericPasswordValidator",
+        ".auth.password_validation.NumericPasswordValidator",
     },
 ]
 
