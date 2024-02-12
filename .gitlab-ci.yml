@@ -25,4 +25,4 @@ black_check:
 testing:
   stage: testing
   script:
-    - python manage.py test
+    - python lyceum/manage.py test
