@@ -13,6 +13,9 @@ DEBUG = os.getenv("DJANGO_DEBUG", default=True)
 ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
 
 INSTALLED_APPS = [
+    "about.apps.AboutConfig",
+    "catalog.apps.CatalogConfig",
+    "homepage.apps.HomepageConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -33,7 +36,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-INTERNALS_IPS = ["127.0.0.0"]
+INTERNALS_IPS = []
 
 ROOT_URLCONF = "lyceum.urls"
 
