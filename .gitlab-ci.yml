@@ -23,4 +23,5 @@ black_check:
 testing:
   stage: testing
   script:
+    - pip install django==4.2
     - python3 lyceum/manage.py test
