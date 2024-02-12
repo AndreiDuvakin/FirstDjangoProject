@@ -1,6 +1,7 @@
 stages:
   - linting
   - black
+  - testing
 
 flake8:
   stage: linting
@@ -19,3 +20,9 @@ black_check:
     - pip install black
     - black --config pyproject.toml .
     - black --check . --line-length 80
+
+
+testing:
+  stage: testing
+  script:
+    - python manage.py test

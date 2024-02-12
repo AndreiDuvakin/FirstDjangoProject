@@ -1,16 +1,16 @@
 import os
 from pathlib import Path
+import json
 
 from dotenv import load_dotenv
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY", default="google")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.getenv("DEBUG", default=True)
-
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DJANGO_DEBUG", default=True)
+ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar"
 ]
 
 MIDDLEWARE = [
@@ -29,6 +30,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware"
+]
+
+INTERNALS_IPS = [
+    '127.0.0.0'
 ]
 
 ROOT_URLCONF = "lyceum.urls"
@@ -61,19 +67,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth"
-        ".password_validation.UserAttributeSimilarityValidator",
+                ".password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.MinimumLengthValidator",
+                ".auth.password_validation.MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.CommonPasswordValidator",
+                ".auth.password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.NumericPasswordValidator",
+                ".auth.password_validation.NumericPasswordValidator",
     },
 ]
 
