@@ -11,13 +11,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
 DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
 
-try:
-    ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
-except json.JSONDecodeError:
-    ALLOWED_HOSTS = []
-
 if DEBUG:
-    ALLOWED_HOSTS = ["*"]
+    try:
+        ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
+    except json.JSONDecodeError:
+        ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
