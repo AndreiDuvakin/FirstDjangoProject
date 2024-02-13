@@ -10,17 +10,12 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
 DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
 
-if DEBUG:
-    ALLOWED_HOSTS = list(
-        map(
-            lambda x: x.strip(),
-            os.getenv(
-                "DJANGO_ALLOWED_HOSTS", default='"127.0.0.1", "localhost"'
-            ),
-        )
+ALLOWED_HOSTS = list(
+    map(
+        lambda x: x.strip(),
+        os.getenv("DJANGO_ALLOWED_HOSTS", default='"127.0.0.1", "localhost"'),
     )
-else:
-    ALLOWED_HOSTS = []
+)
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
