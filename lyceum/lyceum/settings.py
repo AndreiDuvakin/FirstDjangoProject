@@ -9,12 +9,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.getenv("DJANGO_DEBUG", default=True)
+DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
 
 try:
     ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
 except json.JSONDecodeError:
     ALLOWED_HOSTS = []
+
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
@@ -25,7 +28,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles"
+    "django.contrib.staticfiles",
+    "debug_toolbar"
 ]
 
 MIDDLEWARE = [
