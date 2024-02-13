@@ -17,8 +17,8 @@ if DEBUG:
                                              default="[]"))
     except json.JSONDecodeError:
         ALLOWED_HOSTS = []
-
-    INTERNAL_IPS = ["127.0.0.1", "localhost"]
+else:
+    ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
@@ -61,6 +61,8 @@ TEMPLATES = [
         },
     },
 ]
+
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 WSGI_APPLICATION = "lyceum.wsgi.application"
 
