@@ -10,7 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
 DEBUG = os.getenv("DJANGO_DEBUG", default=True)
-ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
+
+try:
+    ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
+except json.JSONDecodeError:
+    ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
@@ -21,8 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "debug_toolbar",
+    "django.contrib.staticfiles"
 ]
 
 MIDDLEWARE = [
@@ -36,7 +39,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-INTERNALS_IPS = []
+INTERNALS_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "lyceum.urls"
 
@@ -68,19 +71,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth"
-        ".password_validation.UserAttributeSimilarityValidator",
+                ".password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.MinimumLengthValidator",
+                ".auth.password_validation.MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.CommonPasswordValidator",
+                ".auth.password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib"
-        ".auth.password_validation.NumericPasswordValidator",
+                ".auth.password_validation.NumericPasswordValidator",
     },
 ]
 
