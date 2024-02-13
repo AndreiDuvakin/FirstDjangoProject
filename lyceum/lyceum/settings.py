@@ -8,7 +8,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
+DEBUG = os.getenv("DJANGO_DEBUG", default="true").lower().strip() in (
+    "true",
+    "yes",
+    "1",
+    "y",
+    "t",
+)
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", default="*").split(",")
 
@@ -54,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-INTERNAL_IPS = ["127.0.0.1", "localhost"]
+INTERNAL_IPS = ["127.0.0.1", "localhost", "*"]
 
 WSGI_APPLICATION = "lyceum.wsgi.application"
 
