@@ -1,4 +1,3 @@
-import json
 import os
 from pathlib import Path
 
@@ -12,12 +11,14 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
 DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
 
 if DEBUG:
-    try:
-        ALLOWED_HOSTS = json.loads(
-            os.getenv("DJANGO_ALLOWED_HOSTS", default="[]")
+    ALLOWED_HOSTS = list(
+        map(
+            lambda x: x.strip(),
+            os.getenv(
+                "DJANGO_ALLOWED_HOSTS", default='"127.0.0.1", "localhost"'
+            ),
         )
-    except json.JSONDecodeError:
-        ALLOWED_HOSTS = []
+    )
 else:
     ALLOWED_HOSTS = []
 
