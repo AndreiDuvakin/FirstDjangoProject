@@ -23,8 +23,9 @@ black_check:
 testing:
   stage: testing
   script:
+    - python -m venv venv
+    - source venv/bin/activate
     - pip install -r requirements/test.txt
-    - python3 lyceum/manage.py test
-    - python3 lyceum/manage.py test lyceum/about
-    - python3 lyceum/manage.py test lyceum/catalog
-    - python3 lyceum/manage.py test lyceum/homepage
+    - cd lyceum
+    - python manage.py test
+    - deactivate
