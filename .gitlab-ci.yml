@@ -25,3 +25,6 @@ testing:
   script:
     - pip install -r requirements/test.txt
     - python3 lyceum/manage.py test
+    - python3 lyceum/manage.py test about
+    - python3 lyceum/manage.py test catalog
+    - python3 lyceum/manage.py test homepage
