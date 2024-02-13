@@ -13,8 +13,8 @@ DEBUG = os.getenv("DJANGO_DEBUG", default="True") == "True"
 
 if DEBUG:
     try:
-        ALLOWED_HOSTS = \
-            json.loads(os.getenv("DJANGO_ALLOWED_HOSTS", default="[]"))
+        ALLOWED_HOSTS = json.loads(os.getenv("DJANGO_ALLOWED_HOSTS",
+                                             default="[]"))
     except json.JSONDecodeError:
         ALLOWED_HOSTS = []
 
