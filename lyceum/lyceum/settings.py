@@ -18,6 +18,8 @@ if DEBUG:
     except json.JSONDecodeError:
         ALLOWED_HOSTS = []
 
+    INTERNAL_IPS = ["127.0.0.1", "localhost"]
+
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
     "catalog.apps.CatalogConfig",
@@ -41,8 +43,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
-
-INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "lyceum.urls"
 
