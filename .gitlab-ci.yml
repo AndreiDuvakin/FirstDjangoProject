@@ -17,7 +17,7 @@ black_check:
   script:
     - pip install black
     - black --config pyproject.toml .
-    - black --check . --line-length 80
+    - black --check . --line-length 78
 
 
 testing:
