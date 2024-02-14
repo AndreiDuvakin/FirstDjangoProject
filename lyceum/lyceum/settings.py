@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="google")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.getenv("DJANGO_DEBUG", default="true").lower().strip() in (
+DEBUG = os.environ.get("DJANGO_DEBUG", default="true").lower().strip() in (
     "true",
     "yes",
     "1",
@@ -16,7 +16,7 @@ DEBUG = os.getenv("DJANGO_DEBUG", default="true").lower().strip() in (
     "t",
 )
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", default="*").split(",")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="*").split(",")
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
@@ -90,9 +90,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = os.getenv("LANGUAGE_CODE", default="en-us")
+LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", default="en-us")
 
-TIME_ZONE = os.getenv("TIME_ZONE", default="UTC")
+TIME_ZONE = os.environ.get("TIME_ZONE", default="UTC")
 
 USE_I18N = True
 
