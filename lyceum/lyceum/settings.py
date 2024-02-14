@@ -16,9 +16,14 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="true").lower().strip() in (
     "t",
 )
 
-ALLOWED_HOSTS = os.environ.get(
-    "DJANGO_ALLOWED_HOSTS", default="127.0.0.1 localhost"
-).split()
+ALLOWED_HOSTS = list(
+    map(
+        lambda x: x.strip(),
+        os.environ.get(
+            "DJANGO_ALLOWED_HOSTS", default="127.0.0.1,localhost,*"
+        ).split(","),
+    )
+)
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
