@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.environ.get("DJANGO_DEBUG", default="true").lower().strip() in (
+DEBUG = os.environ.get("DJANGO_DEBUG", default="false").lower().strip() in (
     "true",
     "yes",
     "1",
