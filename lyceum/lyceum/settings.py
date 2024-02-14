@@ -16,29 +16,9 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="true").lower().strip() in (
     "t",
 )
 
-hosts = os.environ.get("DJANGO_ALLOWED_HOSTS", default="127.0.0.1 localhost")
-if "," in hosts:
-    hosts = tuple(
-        map(
-            lambda x: x.strip(),
-            hosts.split(","),
-        )
-    )
-elif ";" in hosts:
-    hosts = tuple(
-        map(
-            lambda x: x.strip(),
-            hosts.split(";"),
-        )
-    )
-else:
-    hosts = tuple(
-        map(
-            lambda x: x.strip(),
-            hosts.split(),
-        )
-    )
-ALLOWED_HOSTS = hosts
+ALLOWED_HOSTS = os.environ.get(
+    "DJANGO_ALLOWED_HOSTS", default="127.0.0.1 localhost"
+).split()
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
