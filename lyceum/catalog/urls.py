@@ -1,10 +1,9 @@
-from converters import CatalogIntConverter
-
 from django.urls import path, re_path, register_converter
 
+from . import converters
 from . import views
 
-register_converter(CatalogIntConverter, "digit_to_convert")
+register_converter(converters.CatalogIntConverter, "digit_to_convert")
 
 urlpatterns = [
     path("", views.item_list),
