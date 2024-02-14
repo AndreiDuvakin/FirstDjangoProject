@@ -18,24 +18,24 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="true").lower().strip() in (
 
 hosts = os.environ.get("DJANGO_ALLOWED_HOSTS", default="127.0.0.1 localhost")
 if "," in hosts:
-    hosts = list(
+    hosts = tuple(
         map(
             lambda x: x.strip(),
-            hosts.split(";"),
-        )
-    )
-elif " " in hosts.strip():
-    hosts = list(
-        map(
-            lambda x: x.strip(),
-            hosts.split(),
+            hosts.split(","),
         )
     )
 elif ";" in hosts:
-    hosts = list(
+    hosts = tuple(
         map(
             lambda x: x.strip(),
             hosts.split(";"),
+        )
+    )
+else:
+    hosts = tuple(
+        map(
+            lambda x: x.strip(),
+            hosts.split(),
         )
     )
 ALLOWED_HOSTS = hosts
