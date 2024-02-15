@@ -31,5 +31,7 @@ testing:
     - source venv/bin/activate
     - pip install -r requirements/test.txt
     - cd lyceum
-    - python manage.py test
+    - python manage.py test homepage
+    - python manage.py test catalog
+    - python manage.py test about
     - deactivate
