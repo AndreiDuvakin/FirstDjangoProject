@@ -16,6 +16,16 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="false").lower().strip() in (
     "t",
 )
 
+ALLOW_REVERSE = os.environ.get(
+    "DJANGO_ALLOW_REVERSE", default="true"
+).lower().strip() in (
+    "true",
+    "yes",
+    "1",
+    "y",
+    "t",
+)
+
 ALLOWED_HOSTS = list(
     map(
         lambda x: x.strip(),
@@ -45,6 +55,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "lyceum.middleware.FlipWordMiddleware",
 ]
 
 if DEBUG:
