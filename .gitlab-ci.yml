@@ -7,8 +7,6 @@ flake8:
   stage: linting
   image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
-    - python3 -m venv ../venv
-    - source ../venv/bin/activate
     - pip install flake8 flake8-import-order flake8-quotes pep8-naming
     - flake8 . --inline-quotes="double"
   only:
@@ -17,8 +15,6 @@ flake8:
 black_check:
   stage: black
   script:
-    - python3 -m venv ../venv
-    - source ../venv/bin/activate
     - pip install black
     - black --config pyproject.toml .
     - black --check . --line-length 78
@@ -27,11 +23,6 @@ black_check:
 testing:
   stage: testing
   script:
-    - python -m venv venv
-    - source venv/bin/activate
     - pip install -r requirements/test.txt
     - cd lyceum
-    - python manage.py test homepage
-    - python manage.py test catalog
-    - python manage.py test about
-    - deactivate
+    - python manage.py test
