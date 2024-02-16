@@ -8,7 +8,7 @@ class StaticURLTests(TestCase):
 
     def test_homepage_endpoint(self):
         response = Client().get("/")
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, HTTPStatus.OK)
 
     def test_coffee_endpoint(self):
         response = Client().get("/coffee/")
