@@ -59,6 +59,8 @@ Cоздадим виртуальное окружение командой:
 запуска тестов всех модулей введите команду:  
 `python manage.py test`
 
+В случае успешного тестирования в выводе появится вердикт "ОК".
+
 ## Статус проверки
 
 [![Pipeline status](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/pipelines)
