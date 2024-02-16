@@ -26,12 +26,7 @@ ALLOW_REVERSE = os.environ.get(
     "t",
 )
 
-ALLOWED_HOSTS = list(
-    map(
-        lambda x: x.strip(),
-        os.environ.get("DJANGO_ALLOWED_HOSTS").split(","),
-    )
-)
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
 
 INSTALLED_APPS = [
     "about.apps.AboutConfig",
