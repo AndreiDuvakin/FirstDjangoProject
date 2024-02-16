@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from django.conf import settings
 from django.test import Client, TestCase
+from parameterized import parameterized
 
 
 class StaticURLTests(TestCase):
@@ -17,7 +18,10 @@ class StaticURLTests(TestCase):
             (HTTPStatus.IM_A_TEAPOT.value, "Я чайник"),
         )
 
-    def test_on_flip(self):
+    @parameterized.expand(
+        [(i) for i in range(20)]
+    )
+    def test_on_flip(self, digit):
         settings.ALLOW_REVERSE = True
         client = Client()
         responses = []

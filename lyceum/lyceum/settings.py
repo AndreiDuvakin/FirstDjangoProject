@@ -29,7 +29,7 @@ ALLOW_REVERSE = os.environ.get(
 ALLOWED_HOSTS = list(
     map(
         lambda x: x.strip(),
-        os.environ.get("DJANGO_ALLOWED_HOSTS", default="*").split(","),
+        os.environ.get("DJANGO_ALLOWED_HOSTS").split(","),
     )
 )
 
