@@ -13,7 +13,8 @@ class StaticURLTests(TestCase):
     @parameterized.expand(
         [
             ("1",),
-            ("000001",),
+            ("12",),
+            ("100",),
         ]
     )
     def test_catalog_endpoints(self, digit):
@@ -23,7 +24,8 @@ class StaticURLTests(TestCase):
     @parameterized.expand(
         [
             ("1",),
-            ("000001",),
+            ("12",),
+            ("100",),
         ]
     )
     def test_repeat_int_endpoint(self, digit):
