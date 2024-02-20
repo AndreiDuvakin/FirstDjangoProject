@@ -80,18 +80,13 @@ class ModelsTests(django.test.TestCase):
         item_count = catalog.models.Item.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
-                name="SomeName",
-                is_published=True,
-                text="SomeText"
+                name="SomeName", is_published=True, text="SomeText"
             )
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(ModelsTests.tag)
 
-        self.assertEqual(
-            catalog.models.Item.objects.count(),
-            item_count
-        )
+        self.assertEqual(catalog.models.Item.objects.count(), item_count)
 
     def test_create_valide_item(self):
         item_count = catalog.models.Item.objects.count()
@@ -99,12 +94,9 @@ class ModelsTests(django.test.TestCase):
             name="SomeName",
             is_published=True,
             text="превосходно",
-            category=ModelsTests.category
+            category=ModelsTests.category,
         )
         self.item.full_clean()
         self.item.save()
         self.item.tags.add(ModelsTests.tag)
-        self.assertEqual(
-            catalog.models.Item.objects.count(),
-            item_count + 1
-        )
+        self.assertEqual(catalog.models.Item.objects.count(), item_count + 1)
