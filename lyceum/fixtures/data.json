@@ -1,0 +1,142 @@
+[
+  {
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+      "name": "Холодильник",
+      "is_published": true,
+      "text": "Этот холодильник превосходно замораживает все",
+      "category": 1,
+      "tag": [
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+      "name": "Фен",
+      "is_published": true,
+      "text": "Роскошно сушит все, что можно посушить",
+      "category": 1,
+      "tag": [
+        1,
+        4
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+      "name": "Стул",
+      "is_published": true,
+      "text": "Стул на котором можно превосходно провести время",
+      "category": 2,
+      "tag": [
+        2,
+        3,
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+      "name": "Нано шкаф",
+      "is_published": true,
+      "text": "Шкаф в котором может поместиться только одно роскошное платье, зато помещается в сумку",
+      "category": 2,
+      "tag": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+      "name": "Ноутбук",
+      "is_published": true,
+      "text": "Шедевральный ноутбук, выглядит роскошно, работает на процессоре медведь, с оперативной памятью тайга",
+      "category": 1,
+      "tag": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Выгодно",
+      "is_published": true,
+      "slug": "ljfn3lhbdfhk3ve4"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Новое",
+      "is_published": true,
+      "slug": "h3v2jgfv4lwvyukf"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Распродажа",
+      "is_published": true,
+      "slug": "eg3v2kgrjv3jfvk"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Limited edition",
+      "is_published": true,
+      "slug": "j3h2bk4f4uy53yigh5o3igf"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+      "name": "Сертифицированное",
+      "is_published": true,
+      "slug": "h4vblue5y4vbehugvhe"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Техника",
+      "is_published": true,
+      "slug": "vg32cvg3j2hf",
+      "weight": 100
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Мебель",
+      "is_published": true,
+      "slug": "byh4wvgrhvfj4wfvg4",
+      "weight": 100
+    }
+  }
+]

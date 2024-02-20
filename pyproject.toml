@@ -3,4 +3,5 @@ line-length = 80
 exclude = '''
 /venv/
 /.git/
+*/migrations/
 '''
