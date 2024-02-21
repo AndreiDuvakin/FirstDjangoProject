@@ -10,26 +10,26 @@ class ItemAdmin(admin.ModelAdmin):
         core.models.AbstractRootModel.name.field.name,
         core.models.AbstractRootModel.is_published.field.name,
     ]
-    filter_horizontal = ["tags"]
-    list_editable = ["is_published"]
-    list_display_links = ["name"]
+    filter_horizontal = [catalog.models.Item.tags.field.name]
+    list_editable = [core.models.AbstractRootModel.is_published.field.name]
+    list_display_links = [core.models.AbstractRootModel.name.field.name]
 
 
 @admin.register(catalog.models.Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = [
-        "name",
-        "is_published",
+        core.models.AbstractRootModel.name.field.name,
+        core.models.AbstractRootModel.is_published.field.name,
     ]
-    list_editable = ["is_published"]
-    list_display_links = ["name"]
+    list_editable = [core.models.AbstractRootModel.is_published.field.name]
+    list_display_links = [core.models.AbstractRootModel.name.field.name]
 
 
 @admin.register(catalog.models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
-        "name",
-        "is_published",
+        core.models.AbstractRootModel.name.field.name,
+        core.models.AbstractRootModel.is_published.field.name,
     ]
-    list_editable = ["is_published"]
-    list_display_links = ["name"]
+    list_editable = [core.models.AbstractRootModel.is_published.field.name]
+    list_display_links = [core.models.AbstractRootModel.name.field.name]
