@@ -16,8 +16,7 @@ black_check:
   stage: black
   script:
     - pip install black
-    - black --config pyproject.toml .
-    - black --check . --line-length 78
+    - black --check --config pyproject.toml .
 
 
 testing:
