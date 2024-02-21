@@ -55,7 +55,7 @@ class Tag(core.models.AbstractRootModel):
             django.core.validators.RegexValidator(
                 regex=r"^[a-zA-Z0-9_-]+$",
                 message="Значение должно содержать только цифры, "
-                        "буквы латиницы и символы - и _",
+                "буквы латиницы и символы - и _",
             ),
         ],
     )
@@ -84,7 +84,7 @@ class Category(core.models.AbstractRootModel):
             django.core.validators.RegexValidator(
                 regex=r"^[a-zA-Z0-9_-]+$",
                 message="Значение должно содержать только цифры, "
-                        "буквы латиницы и символы - и _",
+                "буквы латиницы и символы - и _",
             ),
         ],
     )
