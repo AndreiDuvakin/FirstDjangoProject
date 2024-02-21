@@ -1,13 +1,14 @@
 from django.contrib import admin
 
 import catalog.models
+import core.models
 
 
 @admin.register(catalog.models.Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = [
-        "name",
-        "is_published",
+        core.models.AbstractRootModel.name.field.name,
+        core.models.AbstractRootModel.is_published.field.name,
     ]
     filter_horizontal = ["tags"]
     list_editable = ["is_published"]
