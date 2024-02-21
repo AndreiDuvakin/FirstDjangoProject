@@ -1,6 +1,5 @@
 [flake8]
 max-line-length = 80
-import-order-style = google
 exclude =
     .git,
     __pycache__,
@@ -13,5 +12,7 @@ exclude =
     .dev,
     .test
 plugins =
+    flake8-commas
+    flake8-import-order
     flake8-commas
 inline-quotes = double

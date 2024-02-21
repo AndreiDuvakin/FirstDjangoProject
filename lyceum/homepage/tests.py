@@ -18,7 +18,7 @@ class StaticURLTests(TestCase):
             (HTTPStatus.IM_A_TEAPOT.value, "Я чайник"),
         )
 
-    @parameterized.expand([(i) for i in range(1, 21)])
+    @parameterized.expand([(i,) for i in range(1, 21)])
     def test_on_flip(self, iteration):
         settings.ALLOW_REVERSE = True
         resp = Client().get("/coffee/").content.decode()

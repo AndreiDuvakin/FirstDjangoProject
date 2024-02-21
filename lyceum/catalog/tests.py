@@ -1,10 +1,11 @@
 from http import HTTPStatus
 
-import catalog.models
 import django.core.exceptions
 import django.test
 from django.test import Client, TestCase
 from parameterized import parameterized
+
+import catalog.models
 
 
 class StaticURLTests(TestCase):

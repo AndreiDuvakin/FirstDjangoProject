@@ -1,6 +1,7 @@
-import core.models
 import django.core.validators
 import django.db.models
+
+import core.models
 
 
 def text_validator(value: str):
