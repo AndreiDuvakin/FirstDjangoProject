@@ -1,0 +1,17 @@
+[flake8]
+max-line-length = 80
+import-order-style = google
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    */migrations/,
+    */.venv/,
+    */venv/,
+    .prod,
+    .dev,
+    .test
+plugins =
+    flake8-commas
+inline-quotes = double

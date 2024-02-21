@@ -2,7 +2,6 @@ from http import HTTPStatus
 
 from django.conf import settings
 from django.test import Client, TestCase
-
 from parameterized import parameterized
 
 

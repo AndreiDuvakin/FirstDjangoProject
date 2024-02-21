@@ -1,6 +1,5 @@
 from catalog import converters
 from catalog import views
-
 from django.urls import path, re_path, register_converter
 
 register_converter(converters.CatalogIntConverter, "digit_to_convert")

@@ -1,5 +1,4 @@
 import core.models
-
 import django.core.validators
 import django.db.models
 
@@ -7,7 +6,7 @@ import django.db.models
 def text_validator(value: str):
     if "превосходно" not in value.lower() and "роскошно" not in value.lower():
         raise django.core.validators.ValidationError(
-            "Значение должно содержать слово превосходно или роскошно"
+            "Значение должно содержать слово превосходно или роскошно",
         )
 
 
@@ -23,20 +22,21 @@ class Item(core.models.AbstractRootModel):
         on_delete=django.db.models.CASCADE,
     )
     tags = django.db.models.ManyToManyField(
-        "tag", help_text="Выберите метки для товара"
+        "tag",
+        help_text="Выберите метки для товара",
     )
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "Товары"
+        verbose_name = "товар"
+        verbose_name_plural = "товары"
 
 
 class Tag(core.models.AbstractRootModel, core.models.AbstractSlug):
     pass
 
     class Meta:
-        verbose_name = "Тег"
-        verbose_name_plural = "Теги"
+        verbose_name = "тег"
+        verbose_name_plural = "теги"
 
 
 class Category(core.models.AbstractRootModel, core.models.AbstractSlug):
@@ -51,5 +51,5 @@ class Category(core.models.AbstractRootModel, core.models.AbstractSlug):
     )
 
     class Meta:
-        verbose_name = "Категория"
-        verbose_name_plural = "Категории"
+        verbose_name = "категория"
+        verbose_name_plural = "категории"

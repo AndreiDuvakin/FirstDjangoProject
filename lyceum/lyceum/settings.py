@@ -17,7 +17,8 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="false").lower().strip() in (
 )
 
 ALLOW_REVERSE = os.environ.get(
-    "DJANGO_ALLOW_REVERSE", default="true"
+    "DJANGO_ALLOW_REVERSE",
+    default="true",
 ).lower().strip() in (
     "true",
     "yes",
@@ -78,7 +79,11 @@ TEMPLATES = [
     },
 ]
 
-INTERNAL_IPS = ["127.0.0.1", "localhost", "*"]
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+    "*",
+]
 
 WSGI_APPLICATION = "lyceum.wsgi.application"
 
@@ -86,7 +91,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

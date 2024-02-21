@@ -137,3 +137,6 @@ dmypy.json
 cython_debug/
 
 /lyceum/catalog/migrations/
+/.dev/
+/.prod/
+/.test/
