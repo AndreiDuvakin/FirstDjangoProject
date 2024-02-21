@@ -4,12 +4,12 @@ import django.db.models
 
 class AbstractRootModel(django.db.models.Model):
     name = django.db.models.TextField(
-        "Название",
+        verbose_name="Название",
         help_text="Введите название",
         max_length=150,
     )
     is_published = django.db.models.BooleanField(
-        "Опубликовано",
+        verbose_name="Опубликовано",
         help_text="Статус публикации",
         default=True,
     )
@@ -20,7 +20,7 @@ class AbstractRootModel(django.db.models.Model):
 
 class AbstractSlug(django.db.models.Model):
     slug = django.db.models.TextField(
-        name="Слаг",
+        verbose_name="Слаг",
         help_text="Введите уникальный набор букв и цифр",
         max_length=200,
         unique=True,

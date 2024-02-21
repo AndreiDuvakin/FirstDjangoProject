@@ -12,7 +12,7 @@ def text_validator(value: str):
 
 class Item(core.models.AbstractRootModel):
     text = django.db.models.TextField(
-        "Текст",
+        verbose_name="Текст",
         help_text="Введите описание товара",
         validators=[text_validator],
     )
@@ -41,7 +41,7 @@ class Tag(core.models.AbstractRootModel, core.models.AbstractSlug):
 
 class Category(core.models.AbstractRootModel, core.models.AbstractSlug):
     weight = django.db.models.IntegerField(
-        "Вес",
+        verbose_name="Вес",
         help_text="Введите вес категории",
         default=100,
         validators=[
