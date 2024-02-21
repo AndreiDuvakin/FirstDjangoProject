@@ -1,21 +1,34 @@
+import django.core.exceptions
 import django.core.validators
 import django.db.models
+import django.utils.deconstruct
 
 import core.models
 
+# раньше это была функция-валидатор, но она больше не нужна
+# а миграции ее сохранили и не дают удалить :(
+text_validator = None  # памагити избавится от этого
 
-def text_validator(value: str):
-    if "превосходно" not in value.lower() and "роскошно" not in value.lower():
-        raise django.core.validators.ValidationError(
-            "Значение должно содержать слово превосходно или роскошно",
-        )
+
+@django.utils.deconstruct.deconstructible
+class ValidateMustContain:
+    def __init__(self, *words):
+        self.words = list(map(lambda word: word.lower(), words))
+
+    def __call__(self, value):
+        value = value.lower()
+        for word in self.words:
+            if word not in value:
+                raise django.core.exceptions.ValidationError(
+                    f"Значение должно содержать слово '{word}'",
+                )
 
 
 class Item(core.models.AbstractRootModel):
     text = django.db.models.TextField(
         verbose_name="текст",
         help_text="Введите описание товара",
-        validators=[text_validator],
+        validators=[ValidateMustContain("роскошно", "превосходно")],
     )
     category = django.db.models.ForeignKey(
         "category",
@@ -42,7 +55,7 @@ class Tag(core.models.AbstractRootModel):
             django.core.validators.RegexValidator(
                 regex=r"^[a-zA-Z0-9_-]+$",
                 message="Значение должно содержать только цифры, "
-                "буквы латиницы и символы - и _",
+                        "буквы латиницы и символы - и _",
             ),
         ],
     )
@@ -71,7 +84,7 @@ class Category(core.models.AbstractRootModel):
             django.core.validators.RegexValidator(
                 regex=r"^[a-zA-Z0-9_-]+$",
                 message="Значение должно содержать только цифры, "
-                "буквы латиницы и символы - и _",
+                        "буквы латиницы и символы - и _",
             ),
         ],
     )

@@ -61,6 +61,12 @@ Cоздадим виртуальное окружение командой:
 
 В случае успешного тестирования в выводе появится вердикт "ОК".
 
+# ER-диаграмма
+Для создания ER-диаграммы можно использовать [DbVisualizer](https://www.dbvis.com/), после
+скачивание нужно подключить базу данных. Для этого нужно создать новое подключение, 
+выбрать тип СУБД Sqlite и указать путь до файла с БД. После этого развернуть базу данных 
+и кликнуть на элемент списка "Таблицы", в открывшемся справа окне выбрать References.
+
 ## Статус проверки
 
 [![Pipeline status](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/pipelines)
