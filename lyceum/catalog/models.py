@@ -32,15 +32,27 @@ class Item(core.models.AbstractRootModel):
         verbose_name_plural = "товары"
 
 
-class Tag(core.models.AbstractRootModel, core.models.AbstractSlug):
-    pass
+class Tag(core.models.AbstractRootModel):
+    slug = django.db.models.TextField(
+        verbose_name="Слаг",
+        help_text="Введите уникальный набор букв и цифр",
+        max_length=200,
+        unique=True,
+        validators=[
+            django.core.validators.RegexValidator(
+                regex=r"^[a-zA-Z0-9_-]+$",
+                message="Значение должно содержать только цифры, "
+                        "буквы латиницы и символы - и _",
+            ),
+        ],
+    )
 
     class Meta:
         verbose_name = "тег"
         verbose_name_plural = "теги"
 
 
-class Category(core.models.AbstractRootModel, core.models.AbstractSlug):
+class Category(core.models.AbstractRootModel):
     weight = django.db.models.IntegerField(
         verbose_name="Вес",
         help_text="Введите вес категории",
@@ -48,6 +60,19 @@ class Category(core.models.AbstractRootModel, core.models.AbstractSlug):
         validators=[
             django.core.validators.MaxValueValidator(100),
             django.core.validators.MinValueValidator(1),
+        ],
+    )
+    slug = django.db.models.TextField(
+        verbose_name="Слаг",
+        help_text="Введите уникальный набор букв и цифр",
+        max_length=200,
+        unique=True,
+        validators=[
+            django.core.validators.RegexValidator(
+                regex=r"^[a-zA-Z0-9_-]+$",
+                message="Значение должно содержать только цифры, "
+                        "буквы латиницы и символы - и _",
+            ),
         ],
     )
 
