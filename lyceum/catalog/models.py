@@ -13,7 +13,7 @@ def text_validator(value: str):
 
 class Item(core.models.AbstractRootModel):
     text = django.db.models.TextField(
-        verbose_name="Текст",
+        verbose_name="текст",
         help_text="Введите описание товара",
         validators=[text_validator],
     )
@@ -34,7 +34,7 @@ class Item(core.models.AbstractRootModel):
 
 class Tag(core.models.AbstractRootModel):
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Введите уникальный набор букв и цифр",
         max_length=200,
         unique=True,
@@ -54,7 +54,7 @@ class Tag(core.models.AbstractRootModel):
 
 class Category(core.models.AbstractRootModel):
     weight = django.db.models.IntegerField(
-        verbose_name="Вес",
+        verbose_name="вес",
         help_text="Введите вес категории",
         default=100,
         validators=[
@@ -63,7 +63,7 @@ class Category(core.models.AbstractRootModel):
         ],
     )
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Введите уникальный набор букв и цифр",
         max_length=200,
         unique=True,

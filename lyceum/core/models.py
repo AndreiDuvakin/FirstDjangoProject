@@ -3,12 +3,12 @@ import django.db.models
 
 class AbstractRootModel(django.db.models.Model):
     name = django.db.models.CharField(
-        verbose_name="Название",
+        verbose_name="название",
         help_text="Введите название",
         max_length=150,
     )
     is_published = django.db.models.BooleanField(
-        verbose_name="Опубликовано",
+        verbose_name="опубликовано",
         help_text="Статус публикации",
         default=True,
     )
