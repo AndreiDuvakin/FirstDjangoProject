@@ -30,10 +30,10 @@ ALLOW_REVERSE = os.environ.get(
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="*").split(",")
 
 INSTALLED_APPS = [
-    "about.apps.AboutConfig",
-    "catalog.apps.CatalogConfig",
-    "homepage.apps.HomepageConfig",
-    "core.apps.CoreConfig",
+    "about",
+    "homepage",
+    "catalog",
+    "core",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

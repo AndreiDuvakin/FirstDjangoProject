@@ -2,7 +2,7 @@ import django.db.models
 
 
 class AbstractRootModel(django.db.models.Model):
-    name = django.db.models.TextField(
+    name = django.db.models.CharField(
         verbose_name="Название",
         help_text="Введите название",
         max_length=150,
