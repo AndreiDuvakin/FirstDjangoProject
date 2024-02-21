@@ -1,34 +1,21 @@
-import django.core.exceptions
 import django.core.validators
 import django.db.models
-import django.utils.deconstruct
 
+import catalog.validators
 import core.models
 
-# раньше это была функция-валидатор, но она больше не нужна
-# а миграции ее сохранили и не дают удалить :(
+# раньше это была функция-валидатор, но она больше не нужна,
+# а миграции ее сохранили и не дают удалить:(
 text_validator = None  # памагити избавится от этого
-
-
-@django.utils.deconstruct.deconstructible
-class ValidateMustContain:
-    def __init__(self, *words):
-        self.words = list(map(lambda word: word.lower(), words))
-
-    def __call__(self, value):
-        value = value.lower()
-        for word in self.words:
-            if word not in value:
-                raise django.core.exceptions.ValidationError(
-                    f"Значение должно содержать слово '{word}'",
-                )
 
 
 class Item(core.models.AbstractRootModel):
     text = django.db.models.TextField(
         verbose_name="текст",
         help_text="Введите описание товара",
-        validators=[ValidateMustContain("роскошно", "превосходно")],
+        validators=[
+            catalog.validators.ValidateMustContain("роскошно", "превосходно"),
+        ],
     )
     category = django.db.models.ForeignKey(
         "category",
