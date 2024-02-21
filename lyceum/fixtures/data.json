@@ -7,7 +7,7 @@
       "is_published": true,
       "text": "Этот холодильник превосходно замораживает все",
       "category": 1,
-      "tag": [
+      "tags": [
         3,
         4
       ]
@@ -21,7 +21,7 @@
       "is_published": true,
       "text": "Роскошно сушит все, что можно посушить",
       "category": 1,
-      "tag": [
+      "tags": [
         1,
         4
       ]
@@ -35,7 +35,7 @@
       "is_published": true,
       "text": "Стул на котором можно превосходно провести время",
       "category": 2,
-      "tag": [
+      "tags": [
         2,
         3,
         5
@@ -50,7 +50,7 @@
       "is_published": true,
       "text": "Шкаф в котором может поместиться только одно роскошное платье, зато помещается в сумку",
       "category": 2,
-      "tag": [
+      "tags": [
         1,
         2,
         3,
@@ -66,7 +66,7 @@
       "is_published": true,
       "text": "Шедевральный ноутбук, выглядит роскошно, работает на процессоре медведь, с оперативной памятью тайга",
       "category": 1,
-      "tag": [
+      "tags": [
         1,
         2,
         3,
@@ -125,8 +125,8 @@
     "fields": {
       "name": "Техника",
       "is_published": true,
-      "slug": "vg32cvg3j2hf",
-      "weight": 100
+      "weight": 100,
+      "slug": "vg32cvg3j2hf"
     }
   },
   {
@@ -135,8 +135,8 @@
     "fields": {
       "name": "Мебель",
       "is_published": true,
-      "slug": "byh4wvgrhvfj4wfvg4",
-      "weight": 100
+      "weight": 100,
+      "slug": "byh4wvgrhvfj4wfvg4"
     }
   }
 ]
