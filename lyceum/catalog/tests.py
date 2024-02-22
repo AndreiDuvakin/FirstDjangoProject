@@ -140,3 +140,24 @@ class ModelsTests(django.test.TestCase):
         self.cat.full_clean()
         self.cat.save()
         self.assertEqual(cat_count + 1, catalog.models.Category.objects.count())
+
+    def test_invalidate_tag(self):
+        tag_count = catalog.models.Tag.objects.count()
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            self.tg = catalog.models.Category(
+                name="SomeName",
+                slug="jgbwee234",
+            )
+            self.tg.full_clean()
+            self.tg.save()
+        self.assertEqual(tag_count, catalog.models.Tag.objects.count())
+
+    def test_validate_tag(self):
+        tag_count = catalog.models.Tag.objects.count()
+        self.tg = catalog.models.Tag(
+            name="SomeName234",
+            slug="jgbwee234",
+        )
+        self.tg.full_clean()
+        self.tg.save()
+        self.assertEqual(tag_count + 1, catalog.models.Tag.objects.count())

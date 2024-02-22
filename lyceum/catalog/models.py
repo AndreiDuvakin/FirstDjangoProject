@@ -44,7 +44,10 @@ class Tag(core.models.AbstractRootModel):
         ],
     )
     current_name = django.db.models.CharField(
-        max_length=150, unique=True, editable=False, null=True,
+        max_length=150,
+        unique=True,
+        editable=False,
+        null=True,
     )
 
     class Meta:
@@ -92,7 +95,10 @@ class Category(core.models.AbstractRootModel):
         ],
     )
     current_name = django.db.models.CharField(
-        max_length=150, unique=True, editable=False, null=True,
+        max_length=150,
+        unique=True,
+        editable=False,
+        null=True,
     )
 
     class Meta:
