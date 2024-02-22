@@ -109,7 +109,7 @@ class ModelsTests(django.test.TestCase):
         self.item = catalog.models.Item(
             name="SomeName",
             is_published=True,
-            text="превосходно",
+            text="превосходнороскошно",
             category=ModelsTests.category,
         )
         self.item.full_clean()
@@ -119,3 +119,24 @@ class ModelsTests(django.test.TestCase):
             catalog.models.Item.objects.count(),
             item_count + 1,
         )
+
+    def test_invalidate_category(self):
+        cat_count = catalog.models.Category.objects.count()
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            self.cat = catalog.models.Category(
+                "SomeName",
+                slug="f34vrab3fgu",
+            )
+            self.cat.full_clean()
+            self.cat.save()
+        self.assertEqual(cat_count, catalog.models.Category.objects.count())
+
+    def test_validate_category(self):
+        cat_count = catalog.models.Category.objects.count()
+        self.cat = catalog.models.Category(
+            name="SomeName234",
+            slug="f34vrab3fgu",
+        )
+        self.cat.full_clean()
+        self.cat.save()
+        self.assertEqual(cat_count + 1, catalog.models.Category.objects.count())

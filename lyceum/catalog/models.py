@@ -1,12 +1,9 @@
+import django.core.exceptions
 import django.core.validators
 import django.db.models
 
 import catalog.validators
 import core.models
-
-# раньше это была функция-валидатор, но она больше не нужна,
-# а миграции ее сохранили и не дают удалить:(
-text_validator = None  # памагити избавится от этого
 
 
 class Item(core.models.AbstractRootModel):
@@ -46,10 +43,29 @@ class Tag(core.models.AbstractRootModel):
             ),
         ],
     )
+    current_name = django.db.models.CharField(
+        max_length=150, unique=True, editable=False, null=True,
+    )
 
     class Meta:
         verbose_name = "тег"
         verbose_name_plural = "теги"
+
+    def clean(self):
+        cur_name = self.name.lower()
+        for i in "., ?!":
+            cur_name = cur_name.replace(i, "")
+        if cur_name in [
+            i.current_name for i in catalog.models.Tag.objects.all()
+        ]:
+            raise django.core.exceptions.ValidationError("Такое имя уже есть")
+
+    def save(self, *args, **kwargs):
+        cur_name = self.name.lower()
+        for i in "., ?!":
+            cur_name = cur_name.replace(i, "")
+        self.current_name = cur_name
+        super().save(*args, **kwargs)
 
 
 class Category(core.models.AbstractRootModel):
@@ -75,7 +91,26 @@ class Category(core.models.AbstractRootModel):
             ),
         ],
     )
+    current_name = django.db.models.CharField(
+        max_length=150, unique=True, editable=False, null=True,
+    )
 
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
+
+    def clean(self):
+        cur_name = self.name.lower()
+        for i in "., ?!":
+            cur_name = cur_name.replace(i, "")
+        if cur_name in [
+            i.current_name for i in catalog.models.Category.objects.all()
+        ]:
+            raise django.core.exceptions.ValidationError("Такое имя уже есть")
+
+    def save(self, *args, **kwargs):
+        cur_name = self.name.lower()
+        for i in "., ?!":
+            cur_name = cur_name.replace(i, "")
+        self.current_name = cur_name
+        super().save(*args, **kwargs)
