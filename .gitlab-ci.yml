@@ -22,6 +22,6 @@ black_check:
 testing:
   stage: testing
   script:
-    - pip install -r requirements/test.txt requirements/prod.txt
+    - pip install -r requirements/test.txt -r requirements/prod.txt
     - cd lyceum
     - python manage.py test
