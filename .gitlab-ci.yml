@@ -7,7 +7,7 @@ flake8:
   stage: linting
   image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
-    - pip install flake8 flake8-import-order flake8-quotes pep8-naming
+    - pip install -r requirements/test.txt
     - flake8 .
   only:
     - main
@@ -15,13 +15,13 @@ flake8:
 black_check:
   stage: black
   script:
-    - pip install black
+    - pip install -r requirements/test.txt
     - black --check --config pyproject.toml .
 
 
 testing:
   stage: testing
   script:
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/test.txt requirements/prod.txt
     - cd lyceum
     - python manage.py test
