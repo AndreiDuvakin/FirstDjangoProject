@@ -140,7 +140,8 @@ class ModelsTests(django.test.TestCase):
         self.cat.full_clean()
         self.cat.save()
         self.assertEqual(
-            cat_count + 1, catalog.models.Category.objects.count(),
+            cat_count + 1,
+            catalog.models.Category.objects.count(),
         )
 
     def test_invalidate_tag(self):
