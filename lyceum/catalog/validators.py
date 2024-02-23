@@ -8,9 +8,10 @@ class ValidateMustContain:
         self.words = [word.lower() for word in words]
 
     def __call__(self, value):
-        value = value.lower()
+        value = value.lower().split()
         for word in self.words:
-            if word not in value:
-                raise django.core.exceptions.ValidationError(
-                    f"Значение должно содержать слово '{word}'",
-                )
+            if word in value:
+                return
+        raise django.core.exceptions.ValidationError(
+            "Значение должно содержать слово превосходно или роскошно",
+        )

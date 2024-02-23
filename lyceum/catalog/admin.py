@@ -7,8 +7,8 @@ import core.models
 @admin.register(catalog.models.Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = [
-        core.models.AbstractRootModel.name.field.name,
-        core.models.AbstractRootModel.is_published.field.name,
+        catalog.models.Item.name.field.name,
+        catalog.models.Item.is_published.field.name,
     ]
     filter_horizontal = [catalog.models.Item.tags.field.name]
     list_editable = [core.models.AbstractRootModel.is_published.field.name]
@@ -18,8 +18,8 @@ class ItemAdmin(admin.ModelAdmin):
 @admin.register(catalog.models.Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = [
-        core.models.AbstractRootModel.name.field.name,
-        core.models.AbstractRootModel.is_published.field.name,
+        catalog.models.Tag.name.field.name,
+        catalog.models.Tag.is_published.field.name,
     ]
     list_editable = [core.models.AbstractRootModel.is_published.field.name]
     list_display_links = [core.models.AbstractRootModel.name.field.name]
@@ -28,8 +28,8 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(catalog.models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
-        core.models.AbstractRootModel.name.field.name,
-        core.models.AbstractRootModel.is_published.field.name,
+        catalog.models.Category.name.field.name,
+        catalog.models.Category.is_published.field.name,
     ]
     list_editable = [core.models.AbstractRootModel.is_published.field.name]
     list_display_links = [core.models.AbstractRootModel.name.field.name]
