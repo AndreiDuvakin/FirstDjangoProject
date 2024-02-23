@@ -1,5 +1,6 @@
 import django.core.exceptions
 import django.db.models
+from unidecode import unidecode
 
 
 class AbstractRootModel(django.db.models.Model):
@@ -35,6 +36,7 @@ class CanonicalNameAbstractModel(django.db.models.Model):
 
     def clean(self, *args, **kwargs):
         canon_name = self.name.lower()
+        canon_name = unidecode(canon_name)
         for i in "., ?!":
             canon_name = canon_name.replace(i, "")
         if (

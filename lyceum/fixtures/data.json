@@ -80,6 +80,7 @@
     "fields": {
       "name": "Выгодно",
       "is_published": true,
+      "canonical_name": "vygodno",
       "slug": "ljfn3lhbdfhk3ve4"
     }
   },
@@ -89,6 +90,7 @@
     "fields": {
       "name": "Новое",
       "is_published": true,
+      "canonical_name": "novoe",
       "slug": "h3v2jgfv4lwvyukf"
     }
   },
@@ -98,6 +100,7 @@
     "fields": {
       "name": "Распродажа",
       "is_published": true,
+      "canonical_name": "rasprodazha",
       "slug": "eg3v2kgrjv3jfvk"
     }
   },
@@ -107,6 +110,7 @@
     "fields": {
       "name": "Limited edition",
       "is_published": true,
+      "canonical_name": "limitededition",
       "slug": "j3h2bk4f4uy53yigh5o3igf"
     }
   },
@@ -116,6 +120,7 @@
     "fields": {
       "name": "Сертифицированное",
       "is_published": true,
+      "canonical_name": "sertifitsirovannoe",
       "slug": "h4vblue5y4vbehugvhe"
     }
   },
@@ -126,7 +131,8 @@
       "name": "Техника",
       "is_published": true,
       "weight": 100,
-      "slug": "vg32cvg3j2hf"
+      "slug": "vg32cvg3j2hf",
+      "canonical_name": "tekhnika"
     }
   },
   {
@@ -136,7 +142,8 @@
       "name": "Мебель",
       "is_published": true,
       "weight": 100,
-      "slug": "byh4wvgrhvfj4wfvg4"
+      "slug": "byh4wvgrhvfj4wfvg4",
+      "canonical_name": "mebel'"
     }
   }
 ]

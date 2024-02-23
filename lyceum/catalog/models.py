@@ -53,7 +53,7 @@ class Category(
         help_text="Введите вес категории",
         default=100,
         validators=[
-            django.core.validators.MaxValueValidator(100),
+            django.core.validators.MaxValueValidator(32767),
             django.core.validators.MinValueValidator(1),
         ],
     )
