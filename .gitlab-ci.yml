@@ -15,7 +15,7 @@ flake8:
 black_check:
   stage: black
   script:
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/dev.txt
     - black --check --config pyproject.toml .
 
 
