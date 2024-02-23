@@ -34,16 +34,45 @@ class CanonicalNameAbstractModel(django.db.models.Model):
     class Meta:
         abstract = True
 
-    def clean(self, *args, **kwargs):
-        canon_name = self.name.lower()
-        canon_name = unidecode(canon_name)
-        for i in "., ?!":
-            canon_name = canon_name.replace(i, "")
+    def check_word(self, word, symbols, resymbols):
+        new_word = word
+        for i in range(len(symbols)):
+            new_word = new_word.replace(symbols[i], resymbols[i])
+        print(
+            word,
+            new_word,
+            [
+                i.canonical_name
+                for i in self._meta.model.objects.filter(
+                    canonical_name=new_word,
+                )
+            ],
+        )
         if (
-            self._meta.model.objects.filter(canonical_name=canon_name)
+            self._meta.model.objects.filter(canonical_name=new_word)
             .exclude(id=self.id)
             .exists()
         ):
             raise django.core.exceptions.ValidationError("Такое имя уже есть")
-        self.canonical_name = canon_name
-        super().save(*args, **kwargs)
+
+    def clean(self, *args, **kwargs):
+        dangerous_letters = {
+            "h": "н",
+            "p": "р",
+            "x": "х",
+        }
+        canon_name_main = self.name.lower()
+        for i in "., ?!":
+            canon_name_main = canon_name_main.replace(i, "")
+        for key, value in dangerous_letters.items():
+            canon_name_main = canon_name_main.replace(key, value)
+        canon_name_main = unidecode(canon_name_main)
+
+        if (
+            self._meta.model.objects.filter(canonical_name=canon_name_main)
+            .exclude(id=self.id)
+            .exists()
+        ):
+            raise django.core.exceptions.ValidationError("Такое имя уже есть")
+
+        self.canonical_name = canon_name_main

@@ -78,15 +78,15 @@ class ModelsTests(django.test.TestCase):
 
         cls.category = catalog.models.Category.objects.create(
             is_published=True,
-            name="SomeName",
+            name="хорошие",
             slug="f34vraevr7veu4",
-            canonical_name="somename",
+            canonical_name="khoroshie",
         )
         cls.tag = catalog.models.Tag.objects.create(
             is_published=True,
-            name="SomeName",
+            name="новое",
             slug="bf3c63gc773gvw543i7v",
-            canonical_name="somename",
+            canonical_name="novoe",
         )
 
     @parameterized.expand(
@@ -138,10 +138,9 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.expand(
         [
-            ("sOmE.nAmE!",),
-            ("s!o.m,e!n?a,m e",),
-            ("SOMENAME",),
-            ("somename",),
+            ("х.О!рошие",),
+            ("XoPоШие",),
+            ("хорошие",),
         ],
     )
     def test_invalidate_category(self, name):
@@ -166,7 +165,7 @@ class ModelsTests(django.test.TestCase):
     def test_validate_category(self, name):
         cat_count = catalog.models.Category.objects.count()
         self.cat = catalog.models.Category(
-            name="SomeName234",
+            name=name,
             slug="f34vrab3fgu",
         )
         self.cat.full_clean()
@@ -178,10 +177,9 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.expand(
         [
-            "sOmE.nAmE!",
-            "s!o.m,e!n?a,m e",
-            "SOMENAME",
-            "somename",
+            "no!vo.e",
+            "Hов ое",
+            "Ново.е",
         ],
     )
     def test_invalidate_tag(self, name):
