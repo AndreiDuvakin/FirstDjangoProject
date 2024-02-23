@@ -80,20 +80,29 @@ class ModelsTests(django.test.TestCase):
             is_published=True,
             name="SomeName",
             slug="f34vraevr7veu4",
+            canonical_name="somename",
         )
         cls.tag = catalog.models.Tag.objects.create(
             is_published=True,
             name="SomeName",
             slug="bf3c63gc773gvw543i7v",
+            canonical_name="somename",
         )
 
-    def test_create_invalide_item(self):
+    @parameterized.expand(
+        [
+            ("SomeName", "превосходнороскошно"),
+            ("NameSome", "превосходное роскошное"),
+            ("omnomnomName", ""),
+        ],
+    )
+    def test_create_invalide_item(self, name, text):
         item_count = catalog.models.Item.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
-                name="SomeName",
+                name=name,
                 is_published=True,
-                text="SomeText",
+                text=text,
             )
             self.item.full_clean()
             self.item.save()
@@ -104,12 +113,19 @@ class ModelsTests(django.test.TestCase):
             item_count,
         )
 
-    def test_create_valide_item(self):
+    @parameterized.expand(
+        [
+            ("SomeName", "превосходно роскошно"),
+            ("NameSome", "превосходно роскошное"),
+            ("omnomnomName", "роскошно"),
+        ],
+    )
+    def test_create_valide_item(self, name, text):
         item_count = catalog.models.Item.objects.count()
         self.item = catalog.models.Item(
-            name="SomeName",
+            name=name,
             is_published=True,
-            text="превосходнороскошно",
+            text=text,
             category=ModelsTests.category,
         )
         self.item.full_clean()
@@ -120,18 +136,34 @@ class ModelsTests(django.test.TestCase):
             item_count + 1,
         )
 
-    def test_invalidate_category(self):
+    @parameterized.expand(
+        [
+            ("sOmE.nAmE!",),
+            ("s!o.m,e!n?a,m e",),
+            ("SOMENAME",),
+            ("somename",),
+        ],
+    )
+    def test_invalidate_category(self, name):
         cat_count = catalog.models.Category.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.cat = catalog.models.Category(
-                "SomeName",
+                name=name,
                 slug="f34vrab3fgu",
             )
             self.cat.full_clean()
             self.cat.save()
         self.assertEqual(cat_count, catalog.models.Category.objects.count())
 
-    def test_validate_category(self):
+    @parameterized.expand(
+        [
+            "Somename1234",
+            "s.omena!me91",
+            "    s.omena   !me91",
+            "s.omena!medsavdc1",
+        ],
+    )
+    def test_validate_category(self, name):
         cat_count = catalog.models.Category.objects.count()
         self.cat = catalog.models.Category(
             name="SomeName234",
@@ -144,21 +176,37 @@ class ModelsTests(django.test.TestCase):
             catalog.models.Category.objects.count(),
         )
 
-    def test_invalidate_tag(self):
+    @parameterized.expand(
+        [
+            "sOmE.nAmE!",
+            "s!o.m,e!n?a,m e",
+            "SOMENAME",
+            "somename",
+        ],
+    )
+    def test_invalidate_tag(self, name):
         tag_count = catalog.models.Tag.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
-            self.tg = catalog.models.Category(
-                name="SomeName",
+            self.tg = catalog.models.Tag(
+                name=name,
                 slug="jgbwee234",
             )
             self.tg.full_clean()
             self.tg.save()
         self.assertEqual(tag_count, catalog.models.Tag.objects.count())
 
-    def test_validate_tag(self):
+    @parameterized.expand(
+        [
+            "Somename1234",
+            "s.omena!me91",
+            "    s.omena   !me91",
+            "s.omena!medsavdc1",
+        ],
+    )
+    def test_validate_tag(self, name):
         tag_count = catalog.models.Tag.objects.count()
         self.tg = catalog.models.Tag(
-            name="SomeName234",
+            name=name,
             slug="jgbwee234",
         )
         self.tg.full_clean()
