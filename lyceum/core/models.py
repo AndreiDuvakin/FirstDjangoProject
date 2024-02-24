@@ -60,6 +60,8 @@ class CanonicalNameAbstractModel(django.db.models.Model):
             "h": "н",
             "p": "р",
             "x": "х",
+            "c": "s",
+            "y": "u",
         }
         canon_name_main = self.name.lower()
         for i in "., ?!":
