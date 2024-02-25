@@ -1,11 +1,6 @@
-import re
-
+import django.core.exceptions
 import django.db.models
-import transliterate
-
-ONLY_LETTERS_REGEX = re.compile(
-    r"[^a-zA-Zа-яА-Я]",
-)
+from unidecode import unidecode
 
 
 class AbstractRootModel(django.db.models.Model):
@@ -39,15 +34,37 @@ class CanonicalNameAbstractModel(django.db.models.Model):
     class Meta:
         abstract = True
 
-    def gen_canonical_name(self):
-        try:
-            transliterated = transliterate.translit(
-                self.name.lower(), reversed=True,
-            )
-        except transliterate.exceptions.LanguageDetectionError:
-            transliterated = self.name.lower()
-
-        return ONLY_LETTERS_REGEX.sub("", transliterated)
+    def check_word(self, word, symbols, resymbols):
+        new_word = word
+        for i in range(len(symbols)):
+            new_word = new_word.replace(symbols[i], resymbols[i])
+        if (
+            self._meta.model.objects.filter(canonical_name=new_word)
+            .exclude(id=self.id)
+            .exists()
+        ):
+            raise django.core.exceptions.ValidationError("Такое имя уже есть")
 
     def clean(self, *args, **kwargs):
-        self.canonical_name = self.gen_canonical_name()
+        dangerous_letters = {
+            "h": "н",
+            "p": "р",
+            "x": "х",
+            "c": "s",
+            "y": "u",
+        }
+        canon_name_main = self.name.lower()
+        for i in "., ?!":
+            canon_name_main = canon_name_main.replace(i, "")
+        for key, value in dangerous_letters.items():
+            canon_name_main = canon_name_main.replace(key, value)
+        canon_name_main = unidecode(canon_name_main)
+
+        if (
+            self._meta.model.objects.filter(canonical_name=canon_name_main)
+            .exclude(id=self.id)
+            .exists()
+        ):
+            raise django.core.exceptions.ValidationError("Такое имя уже есть")
+
+        self.canonical_name = canon_name_main

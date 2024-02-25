@@ -80,7 +80,7 @@ class ModelsTests(django.test.TestCase):
             is_published=True,
             name="хорошие",
             slug="f34vraevr7veu4",
-            canonical_name="horoshie",
+            canonical_name="khoroshie",
         )
         cls.tag = catalog.models.Tag.objects.create(
             is_published=True,
@@ -138,14 +138,13 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.expand(
         [
-            ("Хор!ошие",),
-            ("хOрOш!ие",),
-            ("хор!ошие",),
+            ("х.О!рошие",),
+            ("XoPоШие",),
+            ("хорошие",),
         ],
     )
     def test_invalidate_category(self, name):
         cat_count = catalog.models.Category.objects.count()
-        print(catalog.models.Category.objects.first().canonical_name, 1)
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.cat = catalog.models.Category(
                 name=name,
@@ -153,7 +152,6 @@ class ModelsTests(django.test.TestCase):
             )
             self.cat.full_clean()
             self.cat.save()
-            print(catalog.models.Category.objects.last().canonical_name, 2)
         self.assertEqual(cat_count, catalog.models.Category.objects.count())
 
     @parameterized.expand(
@@ -180,7 +178,7 @@ class ModelsTests(django.test.TestCase):
     @parameterized.expand(
         [
             "no!vo.e",
-            "nов ое",
+            "Hов ое",
             "Ново.е",
         ],
     )
