@@ -10,7 +10,8 @@ import core.models
 
 class ItemMainImages(django.db.models.Model):
     main_image = django.db.models.FileField(
-        "Будет приведено к 1280px", upload_to="uploads",
+        "Будет приведено к 1280px",
+        upload_to="uploads",
     )
 
     def get_image_x1280(self):
