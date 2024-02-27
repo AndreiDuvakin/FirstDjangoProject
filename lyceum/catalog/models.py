@@ -1,13 +1,32 @@
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+import django.utils.html
+from sorl.thumbnail import get_thumbnail
 
 import catalog.validators
 import core.models
 
 
 class ItemMainImages(django.db.models.Model):
-    main_image = django.db.models.FileField(upload_to="uploads")
+    main_image = django.db.models.FileField(
+        "Будет приведено к 1280px", upload_to="uploads",
+    )
+
+    def get_image_x1280(self):
+        return get_thumbnail(self.main_image, "1280", quality=51)
+
+    def image_tmb(self):
+        if self.main_image:
+            return django.utils.html.mark_safe(
+                f'<img scr="{self.main_image.url}" width=50px>',
+            )
+        return "Нет изображения"
+
+    image_tmb.short_description = "превью"
+    image_tmb.allow_tag = True
+
+    list_display = ["image_tmb"]
 
     class Meta:
         db_table = "item_main_images"
@@ -50,6 +69,7 @@ class Item(core.models.AbstractRootModel):
     images = django.db.models.ManyToManyField(
         ItemImages,
         help_text="Изображения товара",
+        null=True,
     )
 
     class Meta:

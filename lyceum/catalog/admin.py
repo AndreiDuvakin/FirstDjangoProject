@@ -36,13 +36,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(catalog.models.ItemMainImages)
 class MainImagesAdmin(admin.ModelAdmin):
-    list_display = [
-        catalog.models.ItemMainImages.main_image.field.name
-    ]
+    list_display = [catalog.models.ItemMainImages.main_image.field.name]
 
 
 @admin.register(catalog.models.ItemImages)
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = [
-        catalog.models.ItemImages.image.field.name
-    ]
+    list_display = [catalog.models.ItemImages.image.field.name]
