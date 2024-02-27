@@ -6,6 +6,24 @@ import catalog.validators
 import core.models
 
 
+class ItemMainImages(django.db.models.Model):
+    main_image = django.db.models.FileField(upload_to="uploads")
+
+    class Meta:
+        db_table = "item_main_images"
+        verbose_name = "главное изображение"
+        verbose_name_plural = "главные изображения"
+
+
+class ItemImages(django.db.models.Model):
+    image = django.db.models.FileField(upload_to="uploads")
+
+    class Meta:
+        db_table = "item_images"
+        verbose_name = "изображение товара"
+        verbose_name_plural = "изображения товаров"
+
+
 class Item(core.models.AbstractRootModel):
     text = django.db.models.TextField(
         verbose_name="текст",
@@ -22,6 +40,16 @@ class Item(core.models.AbstractRootModel):
     tags = django.db.models.ManyToManyField(
         "tag",
         help_text="Выберите метки для товара",
+    )
+    main_image = django.db.models.OneToOneField(
+        to=ItemMainImages,
+        help_text="Основное изображение",
+        on_delete=django.db.models.CASCADE,
+        null=True,
+    )
+    images = django.db.models.ManyToManyField(
+        ItemImages,
+        help_text="Изображения товара",
     )
 
     class Meta:

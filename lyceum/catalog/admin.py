@@ -32,3 +32,17 @@ class CategoryAdmin(admin.ModelAdmin):
     ]
     list_editable = [catalog.models.Item.is_published.field.name]
     list_display_links = [catalog.models.Item.name.field.name]
+
+
+@admin.register(catalog.models.ItemMainImages)
+class MainImagesAdmin(admin.ModelAdmin):
+    list_display = [
+        catalog.models.ItemMainImages.main_image.field.name
+    ]
+
+
+@admin.register(catalog.models.ItemImages)
+class ImagesAdmin(admin.ModelAdmin):
+    list_display = [
+        catalog.models.ItemImages.image.field.name
+    ]
