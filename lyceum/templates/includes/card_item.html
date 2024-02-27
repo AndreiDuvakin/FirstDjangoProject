@@ -1,0 +1,9 @@
+{% load static %}
+<div class="card" style="width: 18rem;">
+    <img src="{% static "img/logo.jpeg" %}" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title">{{ name }}</h5>
+        <p class="card-text">{{ description }}</p>
+        <a href="{% url "catalog:item" id %}" class="btn btn-primary">Открыть товар</a>
+    </div>
+</div>

@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+import django.template.loader
 
 
 def description(request):
-    return HttpResponse("<body>О проекте</body>")
+    template = django.template.loader.get_template("about/about.html")
+    return HttpResponse(template.render({}, request))

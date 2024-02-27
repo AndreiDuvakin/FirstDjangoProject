@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static "img/logo.jpeg" %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/header.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/footer.css" %}"/>
+</head>
+<body>
+        {% include "includes/header.html" %}
+    <main>
+        {% block content %} Контент не подвезлм :( {% endblock content %}
+    </main>
+        {% include "includes/footer.html" %}
+<script src="{% static "js/bootstrap.js" %}"></script>
+</body>
+</html>

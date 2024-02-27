@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+                {% for product in products %}
+                <a class="card" style="width: 18rem;" href="{% url "catalog:item" product.id %}">
+                <img src="{% static "img/logo.jpeg" %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                </div>
+                </a>
+                {% comment "" %}
+                {% include "includes/card_item.html" with
+                name={{product.name}},
+                description={{product.description}},
+                id={{product.id}}
+                %}
+                {% endcomment %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

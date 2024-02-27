@@ -135,7 +135,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-/lyceum/catalog/migrations/
 /.dev/
 /.prod/
 /.test/

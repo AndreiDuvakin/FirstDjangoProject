@@ -1,0 +1,8 @@
+header {
+    padding: 1vw;
+}
+.header_icon {
+    width: 48px;
+    border-radius: 1vw;
+    padding: 5px;
+}
