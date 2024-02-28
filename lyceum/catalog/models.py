@@ -38,7 +38,10 @@ class ItemImages(django.db.models.Model):
 
     def get_image_x300(self):
         return get_thumbnail(
-            self.main_image, "300x300", quality=51, crop="center",
+            self.main_image,
+            "300x300",
+            quality=51,
+            crop="center",
         )
 
     class Meta:
