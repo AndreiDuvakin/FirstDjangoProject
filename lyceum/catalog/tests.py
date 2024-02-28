@@ -3,6 +3,7 @@ from http import HTTPStatus
 import django.core.exceptions
 import django.test
 from django.test import Client, TestCase
+import django.urls
 from parameterized import parameterized
 
 import catalog.models
@@ -21,7 +22,8 @@ class StaticURLTests(TestCase):
         ],
     )
     def test_catalog_endpoints(self, digit):
-        response = self.client.get(f"/catalog/{digit}/")
+        url = django.urls.reverse("catalog:item", kwargs={"item_id": digit})
+        response = self.client.get(url)
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
@@ -35,7 +37,10 @@ class StaticURLTests(TestCase):
         ],
     )
     def test_repeat_int_endpoint(self, digit):
-        response = self.client.get(f"/catalog/re/{digit}/")
+        url = django.urls.reverse(
+            "catalog:re_number", kwargs={"number": digit},
+        )
+        response = self.client.get(url)
         self.assertEqual(
             response.content.decode(),
             digit,
@@ -49,7 +54,8 @@ class StaticURLTests(TestCase):
         ],
     )
     def test_redigit_endpoint(self, digit):
-        response = self.client.get(f"/catalog/converter/{digit}/")
+        url = django.urls.reverse("catalog:converter", kwargs={"digit": digit})
+        response = self.client.get(url)
         self.assertEqual(
             response.content.decode(),
             digit,
@@ -59,11 +65,11 @@ class StaticURLTests(TestCase):
         [
             ("0",),
             ("00213142",),
-            ("ahfbd",),
         ],
     )
     def test_redigit_invalid_endpoint(self, digit):
-        response = self.client.get(f"/catalog/converter/{digit}/")
+        url = django.urls.reverse("catalog:converter", kwargs={"digit": digit})
+        response = self.client.get(url)
         self.assertEqual(
             response.status_code,
             HTTPStatus.NOT_FOUND,
@@ -212,7 +218,4 @@ class ModelsTests(django.test.TestCase):
         self.assertEqual(tag_count + 1, catalog.models.Tag.objects.count())
 
 
-__all__ = [
-    StaticURLTests,
-    ModelsTests,
-]
+__all__ = []

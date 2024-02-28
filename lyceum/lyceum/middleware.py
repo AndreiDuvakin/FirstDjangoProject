@@ -23,3 +23,6 @@ class FlipWordMiddleware:
                 response.content = " ".join(resp).encode()
             self.count += 1
         return response
+
+
+__all__ = [FlipWordMiddleware]

@@ -32,6 +32,4 @@ class StaticURLTests(TestCase):
         self.assertNotIn("Я кинйач", responses)
 
 
-__all__ = [
-    StaticURLTests,
-]
+__all__ = []

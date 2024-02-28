@@ -10,6 +10,8 @@ app_name = "catalog"
 urlpatterns = [
     path("", views.item_list, name="item_list"),
     path("<int:item_id>/", views.item_detail, name="item"),
-    re_path(r"^re/(?P<number>\d+)/$", views.repeat_int),
-    path("converter/<digit_to_convert:digit>/", views.redigit),
+    re_path(r"^re/(?P<number>\d+)/$", views.repeat_int, name="re_number"),
+    path(
+        "converter/<digit_to_convert:digit>/", views.redigit, name="converter",
+    ),
 ]
