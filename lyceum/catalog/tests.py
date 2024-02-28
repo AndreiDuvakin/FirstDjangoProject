@@ -38,7 +38,8 @@ class StaticURLTests(TestCase):
     )
     def test_repeat_int_endpoint(self, digit):
         url = django.urls.reverse(
-            "catalog:re_number", kwargs={"number": digit},
+            "catalog:re_number",
+            kwargs={"number": digit},
         )
         response = self.client.get(url)
         self.assertEqual(

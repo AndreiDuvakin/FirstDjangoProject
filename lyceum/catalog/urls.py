@@ -12,6 +12,8 @@ urlpatterns = [
     path("<int:item_id>/", views.item_detail, name="item"),
     re_path(r"^re/(?P<number>\d+)/$", views.repeat_int, name="re_number"),
     path(
-        "converter/<digit_to_convert:digit>/", views.redigit, name="converter",
+        "converter/<digit_to_convert:digit>/",
+        views.redigit,
+        name="converter",
     ),
 ]
