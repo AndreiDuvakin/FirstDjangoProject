@@ -10,12 +10,10 @@ import core.models
 
 class ItemMainImages(django.db.models.Model):
     main_image = django.db.models.FileField(
-        "Будет приведено к 1280px",
-        upload_to="uploads",
+        "Главное изображение",
+        upload_to="media",
+        null=True,
     )
-
-    def get_image_x1280(self):
-        return get_thumbnail(self.main_image, "1280", quality=51)
 
     def image_tmb(self):
         if self.main_image:
@@ -36,7 +34,12 @@ class ItemMainImages(django.db.models.Model):
 
 
 class ItemImages(django.db.models.Model):
-    image = django.db.models.FileField(upload_to="uploads")
+    image = django.db.models.FileField(upload_to="media", null=True)
+
+    def get_image_x300(self):
+        return get_thumbnail(
+            self.main_image, "300x300", quality=51, crop="center",
+        )
 
     class Meta:
         db_table = "item_images"
@@ -66,11 +69,12 @@ class Item(core.models.AbstractRootModel):
         help_text="Основное изображение",
         on_delete=django.db.models.CASCADE,
         null=True,
+        blank=True,
     )
     images = django.db.models.ManyToManyField(
         ItemImages,
         help_text="Изображения товара",
-        null=True,
+        blank=True,
     )
 
     class Meta:
