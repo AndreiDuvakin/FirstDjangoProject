@@ -128,3 +128,12 @@ class Category(
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
+
+
+__all__ = [
+    ItemMainImages,
+    ItemImages,
+    Item,
+    Tag,
+    Category,
+]

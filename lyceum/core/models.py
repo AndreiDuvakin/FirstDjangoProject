@@ -68,3 +68,9 @@ class CanonicalNameAbstractModel(django.db.models.Model):
             raise django.core.exceptions.ValidationError("Такое имя уже есть")
 
         self.canonical_name = canon_name_main
+
+
+__all__ = [
+    AbstractRootModel,
+    CanonicalNameAbstractModel,
+]

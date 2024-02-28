@@ -40,3 +40,9 @@ def coffee(request):
     resp.status_code = 418
     resp.content = "Я чайник"
     return resp
+
+
+__all__ = [
+    coffee,
+    home,
+]

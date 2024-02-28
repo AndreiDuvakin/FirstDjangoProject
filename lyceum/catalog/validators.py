@@ -15,3 +15,8 @@ class ValidateMustContain:
         raise django.core.exceptions.ValidationError(
             "Значение должно содержать слово превосходно или роскошно",
         )
+
+
+__all__ = [
+    ValidateMustContain,
+]

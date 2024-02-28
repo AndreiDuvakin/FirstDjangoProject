@@ -42,3 +42,12 @@ class MainImagesAdmin(admin.ModelAdmin):
 @admin.register(catalog.models.ItemImages)
 class ImagesAdmin(admin.ModelAdmin):
     list_display = [catalog.models.ItemImages.image.field.name]
+
+
+__all__ = [
+    ItemAdmin,
+    TagAdmin,
+    CategoryAdmin,
+    MainImagesAdmin,
+    ImagesAdmin,
+]

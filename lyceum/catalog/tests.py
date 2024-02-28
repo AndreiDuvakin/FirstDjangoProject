@@ -210,3 +210,9 @@ class ModelsTests(django.test.TestCase):
         self.tg.full_clean()
         self.tg.save()
         self.assertEqual(tag_count + 1, catalog.models.Tag.objects.count())
+
+
+__all__ = [
+    StaticURLTests,
+    ModelsTests,
+]

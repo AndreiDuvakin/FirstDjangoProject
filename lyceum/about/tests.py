@@ -7,3 +7,6 @@ class StaticURLTests(TestCase):
     def test_about_endpoint(self):
         response = Client().get("/about/")
         self.assertEquals(response.status_code, HTTPStatus.OK)
+
+
+__all__ = [StaticURLTests]

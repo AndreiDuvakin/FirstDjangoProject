@@ -46,3 +46,10 @@ def repeat_int(request, number):
 
 def redigit(request, digit):
     return HttpResponse(digit)
+
+
+__all__ = [
+    item_list,
+    repeat_int,
+    redigit,
+]

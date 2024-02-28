@@ -30,3 +30,8 @@ class StaticURLTests(TestCase):
         for iteration in range(1, 20):
             responses.append(Client().get("/coffee/").content.decode())
         self.assertNotIn("Я кинйач", responses)
+
+
+__all__ = [
+    StaticURLTests,
+]
