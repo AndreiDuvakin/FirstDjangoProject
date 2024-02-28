@@ -1,4 +1,2 @@
 django-debug-toolbar==4.3.0
 black==24.1.1
-django-cleanup==8.1.0
-sorl-thumbnail==12.10.0
