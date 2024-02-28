@@ -63,18 +63,19 @@ class StaticURLTests(TestCase):
         )
 
     @parameterized.expand(
-        [
-            ("0",),
-            ("00213142",),
-        ],
+        [("0",), ("00213142",), ("eanmewmf")],
     )
     def test_redigit_invalid_endpoint(self, digit):
-        url = django.urls.reverse("catalog:converter", kwargs={"digit": digit})
-        response = self.client.get(url)
-        self.assertEqual(
-            response.status_code,
-            HTTPStatus.NOT_FOUND,
-        )
+        with self.assertRaises(django.urls.exceptions.NoReverseMatch):
+            url = django.urls.reverse(
+                "catalog:converter",
+                kwargs={"digit": digit},
+            )
+            response = self.client.get(url)
+            self.assertEqual(
+                response.status_code,
+                HTTPStatus.NOT_FOUND,
+            )
 
 
 class ModelsTests(django.test.TestCase):
