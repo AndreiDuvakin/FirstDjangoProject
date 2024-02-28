@@ -1,11 +1,13 @@
 from http import HTTPStatus
 
 from django.test import Client, TestCase
+import django.urls
 
 
 class StaticURLTests(TestCase):
     def test_about_endpoint(self):
-        response = Client().get("/about/")
+        url = django.urls.reverse("about:about")
+        response = Client().get(url)
         self.assertEquals(response.status_code, HTTPStatus.OK)
 
 
