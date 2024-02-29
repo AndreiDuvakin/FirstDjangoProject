@@ -1,6 +1,4 @@
-from ckeditor.widgets import CKEditorWidget
 from django.contrib import admin
-import django.db.models
 
 import catalog.models
 
@@ -16,11 +14,6 @@ class ItemAdmin(admin.ModelAdmin):
         catalog.models.Item.name.field.name,
         catalog.models.Item.is_published.field.name,
     ]
-    formfield_overrides = {
-        django.db.models.TextField: {
-            "widget": CKEditorWidget,
-        },
-    }
     filter_horizontal = [catalog.models.Item.tags.field.name]
     list_editable = [catalog.models.Item.is_published.field.name]
     list_display_links = [catalog.models.Item.name.field.name]
