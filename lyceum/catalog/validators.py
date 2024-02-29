@@ -17,7 +17,7 @@ class ValidateMustContain:
             if word in value:
                 return
         raise django.core.exceptions.ValidationError(
-            "Значение должно содержать слово превосходно или роскошно",
+            f"Значение должно содержать слово превосходно или роскошно {value}",
         )
 
 
