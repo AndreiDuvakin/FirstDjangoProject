@@ -1,10 +1,16 @@
 import os
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+LANGUAGES = [
+    ("en", _("English")),
+    ("ru", _("Russian")),
+]
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
@@ -54,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "lyceum.middleware.FlipWordMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 if DEBUG:
