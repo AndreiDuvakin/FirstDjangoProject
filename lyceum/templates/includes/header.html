@@ -2,17 +2,34 @@
 {% load i18n %}
 <header>
     <div class="row">
-        <img src="{% static "img/logo.jpeg" %}" class="header_icon col-1">
-        <ul class="nav nav-pills justify-content-center col-11">
+        <img src="{% static "img/logo.jpeg" %}" class="header_icon col-4">
+        <form action="{% url 'set_language' %}" class="col-2" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
+        <ul class="nav nav-pills justify-content-center col-6">
             {% with request.resolver_match.view_name as view_name %}
             <li class="nav-item">
-                <a class="nav-link {% if view_name == 'homepage:homepage' %} active {% endif %}" href="{% url "homepage:homepage" %}">{% trans "Главная" %}</a>
+                <a class="nav-link {% if view_name == 'homepage:homepage' %} active {% endif %}" href="{% url "
+                   homepage:homepage" %}">{% trans "Главная" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if view_name == 'catalog:item_list' %} active {% endif %}" href="{% url "catalog:item_list" %}">{% trans "Список товаров" %}</a>
+                <a class="nav-link {% if view_name == 'catalog:item_list' %} active {% endif %}" href="{% url "
+                   catalog:item_list" %}">{% trans "Список товаров" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if view_name == 'about:about' %} active {% endif %}" href="{% url "about:about" %}">{% trans "О проекте" %}</a>
+                <a class="nav-link {% if view_name == 'about:about' %} active {% endif %}" href="{% url " about:about"
+                %}">{% trans "О проекте" %}</a>
             </li>
             {% endwith %}
         </ul>

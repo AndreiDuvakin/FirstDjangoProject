@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 19:56+0500\n"
+"POT-Creation-Date: 2024-02-29 21:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lyceum/settings.py:11
-msgid "English"
-msgstr ""
-
-#: lyceum/settings.py:12
-msgid "Russian"
-msgstr ""
-
-#: templates/includes/header.html:9
+#: templates/includes/header.html:22
 msgid "Главная"
-msgstr ""
+msgstr "Home"
 
-#: templates/includes/header.html:12
+#: templates/includes/header.html:25
 msgid "Список товаров"
-msgstr ""
+msgstr "Item List"
 
-#: templates/includes/header.html:15
+#: templates/includes/header.html:28
 msgid "О проекте"
-msgstr ""
+msgstr "About project"

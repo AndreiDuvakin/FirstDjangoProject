@@ -12,6 +12,8 @@ LANGUAGES = [
     ("ru", _("Russian")),
 ]
 
+USE_I18N = True
+
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
 DEBUG = os.environ.get("DJANGO_DEBUG", default="false").lower().strip() in (
@@ -125,7 +127,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "ru-RU"
+LANGUAGE_CODE = "ru"
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 
 TIME_ZONE = "UTC"
 
