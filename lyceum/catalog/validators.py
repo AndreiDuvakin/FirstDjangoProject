@@ -10,7 +10,7 @@ class ValidateMustContain:
         self.words = [word.lower() for word in words]
 
     def __call__(self, value):
-        for i in string.punctuation:
+        for i in string.punctuation + "©":
             value = value.replace(i, " ")
         value = value.lower().split()
         for word in self.words:
