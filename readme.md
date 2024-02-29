@@ -69,7 +69,7 @@ Cоздадим виртуальное окружение командой:
 ![ER.jpg](ER.jpg)
 
 # Перевод
-Для создания динамического перевода на сайте необходимо запустить команду:  
+Для создания динамического перевода на сайте необходимо запустить команды:  
 `python manage.py makemessages -l ru`  
 `python manage.py makemessages -l en`  
 `python manage.py compilemessages`

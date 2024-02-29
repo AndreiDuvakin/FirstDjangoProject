@@ -12,3 +12,12 @@ msgstr "Список товаров"
 
 msgid "About Us"
 msgstr "О нас"
+
+msgid "Английский"
+msgstr "English"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "О проекте"
+msgstr "About project"
