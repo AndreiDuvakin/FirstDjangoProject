@@ -68,6 +68,10 @@ Cоздадим виртуальное окружение командой:
 и кликнуть на элемент списка "Таблицы", в открывшемся справа окне выбрать References.
 ![ER.jpg](ER.jpg)
 
+# Перевод
+Для создания динамического перевода на сайте необходимо запустить команду:  
+`python manage.py compilemessages`
+
 ## Статус проверки
 
 [![Pipeline status](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/pipelines)
