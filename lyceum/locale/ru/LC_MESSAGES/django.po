@@ -31,3 +31,9 @@ msgstr "Список товаров"
 #: templates/includes/header.html:28
 msgid "About project"
 msgstr "О проекте"
+
+msgid "Item List"
+msgstr "Список товаров"
+
+msgid "English"
+msgstr "Английский"
