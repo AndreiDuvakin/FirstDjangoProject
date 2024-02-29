@@ -1,5 +1,3 @@
-msgid ""
-msgstr ""
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
@@ -10,14 +8,11 @@ msgstr "Главная"
 msgid "Item List"
 msgstr "Список товаров"
 
-msgid "About Us"
-msgstr "О нас"
+msgid "English"
+msgstr "Английский"
 
-msgid "Английский"
-msgstr "English"
+msgid "Russian"
+msgstr "Русский"
 
-msgid "Русский"
-msgstr "Russian"
-
-msgid "О проекте"
-msgstr "About project"
+msgid "About project"
+msgstr "О проекте"

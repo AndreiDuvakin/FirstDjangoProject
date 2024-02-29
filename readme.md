@@ -70,9 +70,8 @@ Cоздадим виртуальное окружение командой:
 
 # Перевод
 Для создания динамического перевода на сайте необходимо запустить команды:  
-`python manage.py makemessages -l ru`  
-`python manage.py makemessages -l en`  
-`python manage.py compilemessages`
+`django-admin makemessages -a`    
+`django-admin compilemessages`
 
 ## Статус проверки
 

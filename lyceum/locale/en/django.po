@@ -1,14 +1,19 @@
-msgid ""
-msgstr ""
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Home"
+msgid "Главная"
 msgstr "Home"
 
-msgid "Item List"
+msgid "Список товаров"
 msgstr "Item List"
 
-msgid "About Us"
-msgstr "About Us"
+msgid "Английский"
+msgstr "English"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "О проекте"
+msgstr "About project"
+
