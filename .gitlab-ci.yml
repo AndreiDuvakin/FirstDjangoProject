@@ -14,10 +14,10 @@ flake8:
 
 black_check:
   stage: black
+  image: python:3.9
   script:
     - pip install -r requirements/dev.txt
     - black --check --config pyproject.toml .
-
 
 testing:
   stage: testing
