@@ -3,6 +3,11 @@ from django.contrib import admin
 import catalog.models
 
 
+class ItemAdminInline(admin.TabularInline):
+    model = catalog.models.Item
+    extra = 1
+
+
 @admin.register(catalog.models.Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = [
@@ -37,6 +42,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(catalog.models.ItemMainImages)
 class MainImagesAdmin(admin.ModelAdmin):
     list_display = [catalog.models.ItemMainImages.main_image.field.name]
+    inlines = [
+        ItemAdminInline,
+    ]
 
 
 @admin.register(catalog.models.ItemImages)

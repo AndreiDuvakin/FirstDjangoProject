@@ -23,7 +23,7 @@ class ItemMainImages(django.db.models.Model):
         return "Нет изображения"
 
     image_tmb.short_description = "превью"
-    image_tmb.allow_tag = True
+    image_tmb.allow_tags = True
 
     list_display = ["image_tmb"]
 
@@ -38,11 +38,23 @@ class ItemImages(django.db.models.Model):
 
     def get_image_x300(self):
         return get_thumbnail(
-            self.main_image,
+            self.image,
             "300x300",
             quality=51,
             crop="center",
         )
+
+    def image_tmb(self):
+        if self.image:
+            return django.utils.html.mark_safe(
+                f'<img scr="{self.image.url}" width=50px>',
+            )
+        return "Нет изображения"
+
+    image_tmb.short_description = "превью"
+    image_tmb.allow_tags = True
+
+    list_display = ["image_tmb"]
 
     class Meta:
         db_table = "item_images"
@@ -66,6 +78,7 @@ class Item(core.models.AbstractRootModel):
     tags = django.db.models.ManyToManyField(
         "tag",
         help_text="Выберите метки для товара",
+        related_name="items",
     )
     main_image = django.db.models.OneToOneField(
         to=ItemMainImages,
@@ -78,6 +91,7 @@ class Item(core.models.AbstractRootModel):
         ItemImages,
         help_text="Изображения товара",
         blank=True,
+        related_name="items",
     )
 
     class Meta:
