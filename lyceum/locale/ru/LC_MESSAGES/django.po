@@ -32,8 +32,8 @@ msgstr "Список товаров"
 msgid "About project"
 msgstr "О проекте"
 
-msgid "Item List"
-msgstr "Список товаров"
+msgid "Russian"
+msgstr "Русский"
 
 msgid "English"
 msgstr "Английский"
