@@ -7,12 +7,10 @@
       "is_published": true,
       "text": "Этот холодильник превосходно замораживает все",
       "category": 1,
-      "main_image": null,
       "tags": [
         3,
         4
-      ],
-      "images": []
+      ]
     }
   },
   {
@@ -23,12 +21,10 @@
       "is_published": true,
       "text": "Роскошно сушит все, что можно посушить",
       "category": 1,
-      "main_image": null,
       "tags": [
         1,
         4
-      ],
-      "images": []
+      ]
     }
   },
   {
@@ -39,13 +35,11 @@
       "is_published": true,
       "text": "Стул на котором можно превосходно провести время",
       "category": 2,
-      "main_image": null,
       "tags": [
         2,
         3,
         5
-      ],
-      "images": []
+      ]
     }
   },
   {
@@ -56,14 +50,12 @@
       "is_published": true,
       "text": "Шкаф в котором может поместиться только одно платье, роскошно, зато помещается в сумку",
       "category": 2,
-      "main_image": null,
       "tags": [
         1,
         2,
         3,
         4
-      ],
-      "images": []
+      ]
     }
   },
   {
@@ -72,16 +64,30 @@
     "fields": {
       "name": "Ноутбук",
       "is_published": true,
-      "text": "Шедевральный ноутбук, выглядит роскошно работает на процессоре медведь, с оперативной памятью тайга",
+      "text": "<p>Шедевральный ноутбук, выглядит роскошно работает на процессоре медведь, с оперативной памятью тайга</p>",
       "category": 1,
-      "main_image": null,
       "tags": [
         1,
         2,
         3,
         4
-      ],
-      "images": []
+      ]
+    }
+  },
+  {
+    "model": "catalog.itemimages",
+    "pk": 1,
+    "fields": {
+      "image": "media/1669834399_25-indasil-club-p-noutbuk-risunok-dlya-detei-krasivo-31.png",
+      "item": 5
+    }
+  },
+  {
+    "model": "catalog.itemmainimages",
+    "pk": 1,
+    "fields": {
+      "image": "media/нб.png",
+      "item": 5
     }
   },
   {
@@ -140,9 +146,9 @@
     "fields": {
       "name": "Техника",
       "is_published": true,
+      "canonical_name": "tekhnika",
       "weight": 100,
-      "slug": "vg32cvg3j2hf",
-      "canonical_name": "tekhnika"
+      "slug": "vg32cvg3j2hf"
     }
   },
   {
@@ -151,9 +157,9 @@
     "fields": {
       "name": "Мебель",
       "is_published": true,
+      "canonical_name": "mebel'",
       "weight": 100,
-      "slug": "byh4wvgrhvfj4wfvg4",
-      "canonical_name": "mebel'"
+      "slug": "byh4wvgrhvfj4wfvg4"
     }
   }
 ]
