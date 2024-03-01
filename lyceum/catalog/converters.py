@@ -8,4 +8,4 @@ class CatalogIntConverter:
         return str(value)
 
 
-__all__ = [CatalogIntConverter]
+__all__ = []

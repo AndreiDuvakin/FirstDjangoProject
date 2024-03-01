@@ -3,25 +3,25 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static "img/fav/favicon-32x32.png" %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static "img/fav/apple-touch-icon.png" %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static "img/fav/favicon-16x16.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/fav/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
     <link rel="manifest" href="img/fav/site.webmanifest">
-    <link rel="icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
-    <link rel="icon" href="{% static "img/logo.jpeg" %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{% static "css/bootstrap/bootstrap.min.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/header.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/footer.css" %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"/>
 </head>
 <body>
-        {% include "includes/header.html" %}
+        {% include 'includes/header.html' %}
     <main>
         {% block content %} Контент не подвезлм :( {% endblock content %}
     </main>
-        {% include "includes/footer.html" %}
-<script src="{% static "js/footer.js" %}"></script>
-<script src="{% static "js/bootstrap/bootstrap.js" %}"></script>
+        {% include 'includes/footer.html' %}
+<script src="{% static 'js/footer.js' %}"></script>
+<script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
 </body>
 </html>

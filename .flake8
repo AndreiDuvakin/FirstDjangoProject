@@ -12,7 +12,8 @@ exclude =
     */venv/,
     .prod,
     .dev,
-    .test
+    .test,
+    tvenv
 plugins =
     flake8-commas
     flake8-import-order

@@ -7,4 +7,4 @@ def description(request):
     return HttpResponse(template.render({}, request))
 
 
-__all__ = [description]
+__all__ = []

@@ -3,8 +3,13 @@ from django.contrib import admin
 import catalog.models
 
 
-class ItemAdminInline(admin.TabularInline):
-    model = catalog.models.Item
+class MainImageAdminInline(admin.TabularInline):
+    model = catalog.models.ItemMainImages
+    extra = 1
+
+
+class ImagesAdminInline(admin.StackedInline):
+    model = catalog.models.ItemImages
     extra = 1
 
 
@@ -13,6 +18,10 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = [
         catalog.models.Item.name.field.name,
         catalog.models.Item.is_published.field.name,
+    ]
+    inlines = [
+        MainImageAdminInline,
+        ImagesAdminInline,
     ]
     filter_horizontal = [catalog.models.Item.tags.field.name]
     list_editable = [catalog.models.Item.is_published.field.name]
@@ -39,23 +48,4 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = [catalog.models.Item.name.field.name]
 
 
-@admin.register(catalog.models.ItemMainImages)
-class MainImagesAdmin(admin.ModelAdmin):
-    list_display = [catalog.models.ItemMainImages.main_image.field.name]
-    inlines = [
-        ItemAdminInline,
-    ]
-
-
-@admin.register(catalog.models.ItemImages)
-class ImagesAdmin(admin.ModelAdmin):
-    list_display = [catalog.models.ItemImages.image.field.name]
-
-
-__all__ = [
-    ItemAdmin,
-    TagAdmin,
-    CategoryAdmin,
-    MainImagesAdmin,
-    ImagesAdmin,
-]
+__all__ = []

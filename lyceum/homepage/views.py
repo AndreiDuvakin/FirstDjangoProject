@@ -42,7 +42,4 @@ def coffee(request):
     return resp
 
 
-__all__ = [
-    coffee,
-    home,
-]
+__all__ = []

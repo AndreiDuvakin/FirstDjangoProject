@@ -70,7 +70,4 @@ class CanonicalNameAbstractModel(django.db.models.Model):
         self.canonical_name = canon_name_main
 
 
-__all__ = [
-    AbstractRootModel,
-    CanonicalNameAbstractModel,
-]
+__all__ = []

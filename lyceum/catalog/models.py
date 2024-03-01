@@ -9,33 +9,39 @@ import catalog.validators
 import core.models
 
 
-class ItemMainImages(django.db.models.Model):
-    main_image = django.db.models.FileField(
-        "Главное изображение",
-        upload_to="media",
-        null=True,
+class Item(core.models.AbstractRootModel):
+    text = RichTextField(
+        verbose_name="текст",
+        help_text="Введите описание товара",
+        validators=[
+            catalog.validators.ValidateMustContain("роскошно", "превосходно"),
+        ],
+    )
+    category = django.db.models.ForeignKey(
+        "category",
+        help_text="Выберите категорию для товара",
+        on_delete=django.db.models.CASCADE,
+    )
+    tags = django.db.models.ManyToManyField(
+        "tag",
+        help_text="Выберите метки для товара",
+        related_name="items",
     )
 
-    def image_tmb(self):
-        if self.main_image:
-            return django.utils.html.mark_safe(
-                f'<img scr="{self.main_image.url}" width=50px>',
-            )
-        return "Нет изображения"
-
-    image_tmb.short_description = "превью"
-    image_tmb.allow_tags = True
-
-    list_display = ["image_tmb"]
-
     class Meta:
-        db_table = "item_main_images"
-        verbose_name = "главное изображение"
-        verbose_name_plural = "главные изображения"
+        verbose_name = "товар"
+        verbose_name_plural = "товары"
 
 
 class ItemImages(django.db.models.Model):
-    image = django.db.models.FileField(upload_to="media", null=True)
+    image = django.db.models.ImageField(upload_to="media", null=True)
+    item = django.db.models.ForeignKey(
+        Item,
+        on_delete=django.db.models.CASCADE,
+        related_name="images",
+        null=True,
+        blank=True,
+    )
 
     def get_image_x300(self):
         return get_thumbnail(
@@ -60,44 +66,39 @@ class ItemImages(django.db.models.Model):
     class Meta:
         db_table = "item_images"
         verbose_name = "изображение товара"
-        verbose_name_plural = "изображения товаров"
+        verbose_name_plural = "изображения товара"
 
 
-class Item(core.models.AbstractRootModel):
-    text = RichTextField(
-        verbose_name="текст",
-        help_text="Введите описание товара",
-        validators=[
-            catalog.validators.ValidateMustContain("роскошно", "превосходно"),
-        ],
+class ItemMainImages(django.db.models.Model):
+    image = django.db.models.FileField(
+        "Главное изображение",
+        upload_to="media",
+        null=True,
     )
-    category = django.db.models.ForeignKey(
-        "category",
-        help_text="Выберите категорию для товара",
-        on_delete=django.db.models.CASCADE,
-    )
-    tags = django.db.models.ManyToManyField(
-        "tag",
-        help_text="Выберите метки для товара",
-        related_name="items",
-    )
-    main_image = django.db.models.OneToOneField(
-        to=ItemMainImages,
+    item = django.db.models.OneToOneField(
+        to=Item,
         help_text="Основное изображение",
         on_delete=django.db.models.CASCADE,
         null=True,
         blank=True,
     )
-    images = django.db.models.ManyToManyField(
-        ItemImages,
-        help_text="Изображения товара",
-        blank=True,
-        related_name="items",
-    )
+
+    def image_tmb(self):
+        if self.image:
+            return django.utils.html.mark_safe(
+                f'<img scr="{self.image.url}" width=50px>',
+            )
+        return "Нет изображения"
+
+    image_tmb.short_description = "превью"
+    image_tmb.allow_tags = True
+
+    list_display = ["image_tmb"]
 
     class Meta:
-        verbose_name = "товар"
-        verbose_name_plural = "товары"
+        db_table = "item_main_images"
+        verbose_name = "главное изображение"
+        verbose_name_plural = "главные изображения"
 
 
 class Tag(
@@ -133,22 +134,10 @@ class Category(
         help_text="Введите уникальный набор букв и цифр",
         max_length=200,
     )
-    canonical_name = django.db.models.CharField(
-        max_length=150,
-        unique=True,
-        editable=False,
-        null=True,
-    )
 
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
 
 
-__all__ = [
-    ItemMainImages,
-    ItemImages,
-    Item,
-    Tag,
-    Category,
-]
+__all__ = []
