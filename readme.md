@@ -77,9 +77,6 @@ Cоздадим виртуальное окружение командой:
 `python manage.py makemigrations`  
 `python manage.py migrate`
 
-Для заполнения базы данных можно воспользоваться фикстурами:  
-`python manage.py loaddata fixtures/data.json`
-
 ## Статус проверки
 
 [![Pipeline status](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/spring/course/students/43836-Mr.BoyMan-yandex.ru-course-1112/pipelines)

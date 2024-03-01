@@ -10,7 +10,6 @@ class MainImageAdminInline(admin.TabularInline):
 
 class ImagesAdminInline(admin.StackedInline):
     model = catalog.models.ItemImages
-    extra = 1
 
 
 @admin.register(catalog.models.Item)
