@@ -5,7 +5,7 @@
     "fields": {
       "name": "Холодильник",
       "is_published": true,
-      "text": "Этот холодильник превосходно замораживает все",
+      "text": "<p>Этот холодильник превосходно замораживает все</p>",
       "category": 1,
       "tags": [
         3,
@@ -19,7 +19,7 @@
     "fields": {
       "name": "Фен",
       "is_published": true,
-      "text": "Роскошно сушит все, что можно посушить",
+      "text": "<p>Роскошно сушит все, что можно посушить</p>",
       "category": 1,
       "tags": [
         1,
@@ -33,7 +33,7 @@
     "fields": {
       "name": "Стул",
       "is_published": true,
-      "text": "Стул на котором можно превосходно провести время",
+      "text": "<p>Стул на котором можно превосходно провести время</p>",
       "category": 2,
       "tags": [
         2,
@@ -48,7 +48,7 @@
     "fields": {
       "name": "Нано шкаф",
       "is_published": true,
-      "text": "Шкаф в котором может поместиться только одно платье, роскошно, зато помещается в сумку",
+      "text": "<p>Шкаф в котором может поместиться только одно платье, роскошно, зато помещается в сумку</p>",
       "category": 2,
       "tags": [
         1,
@@ -78,16 +78,32 @@
     "model": "catalog.itemimages",
     "pk": 1,
     "fields": {
+      "image": "1669834399_25-indasil-club-p-noutbuk-risunok-dlya-detei-krasivo-31.png",
+      "item": 5
+    }
+  },
+  {
+    "model": "catalog.itemmainimages",
+    "pk": 7,
+    "fields": {
       "image": "media/1669834399_25-indasil-club-p-noutbuk-risunok-dlya-detei-krasivo-31.png",
       "item": 5
     }
   },
   {
     "model": "catalog.itemmainimages",
-    "pk": 1,
+    "pk": 8,
     "fields": {
-      "image": "media/нб.png",
-      "item": 5
+      "image": "media/item.png",
+      "item": 4
+    }
+  },
+  {
+    "model": "catalog.itemmainimages",
+    "pk": 9,
+    "fields": {
+      "image": "media/item_KzuYuaF.png",
+      "item": 3
     }
   },
   {

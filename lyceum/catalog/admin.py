@@ -14,7 +14,14 @@ class ImagesAdminInline(admin.StackedInline):
 
 @admin.register(catalog.models.Item)
 class ItemAdmin(admin.ModelAdmin):
+    def get_img(self, obj):
+        img = catalog.models.ItemMainImages.objects.filter(item=obj.id).first()
+        if img:
+            return img.image_tmb()
+        return "Изображения нет"
+
     list_display = [
+        "get_img",
         catalog.models.Item.name.field.name,
         catalog.models.Item.is_published.field.name,
     ]

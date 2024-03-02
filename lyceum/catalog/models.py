@@ -83,17 +83,19 @@ class ItemMainImages(django.db.models.Model):
         blank=True,
     )
 
+    def get_image_400x300(self):
+        return get_thumbnail(self.image, "400x300", crop="center", quality=51)
+
     def image_tmb(self):
         if self.image:
             return django.utils.html.mark_safe(
-                f'<img scr="{self.image.url}" width=50px>',
+                f'<img src="{self.image.url}"'
+                f' width=50px alt="Ошибка загрузки">',
             )
         return "Нет изображения"
 
     image_tmb.short_description = "превью"
     image_tmb.allow_tags = True
-
-    list_display = ["image_tmb"]
 
     class Meta:
         db_table = "item_main_images"

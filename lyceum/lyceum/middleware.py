@@ -16,7 +16,7 @@ class FlipWordMiddleware:
                 cont = response.content.decode().split()
                 resp = []
                 for i in cont:
-                    if bool(re.match(r"^[а-яА-Я]+$", i)):
+                    if bool(re.match(r"^[а-я]+$", i.lower())):
                         resp.append(i[::-1])
                     else:
                         resp.append(i)
