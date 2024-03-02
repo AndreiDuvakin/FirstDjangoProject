@@ -27,6 +27,10 @@ class Item(core.models.AbstractRootModel):
         help_text="Выберите метки для товара",
         related_name="items",
     )
+    is_on_main = django.db.models.BooleanField(
+        verbose_name="Отобразить на главную",
+        default=False,
+    )
 
     class Meta:
         verbose_name = "товар"
