@@ -9,7 +9,61 @@ import catalog.validators
 import core.models
 
 
+class ItemManager(django.db.models.Manager):
+    def on_main(self):
+        return (
+            self.get_queryset()
+            .filter(
+                is_on_main=True,
+                is_published=True,
+                category__is_published=True,
+            )
+            .select_related("category", "itemmainimages")
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    "tags",
+                    queryset=catalog.models.Tag.objects.filter(
+                        is_published=True,
+                    ).only("name"),
+                ),
+            )
+            .only(
+                "id",
+                "name",
+                "text",
+                "category__name",
+                "itemmainimages__image",
+            )
+            .order_by("name")
+        )
+
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True, category__is_published=True)
+            .select_related("category", "itemmainimages")
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    "tags",
+                    queryset=catalog.models.Tag.objects.filter(
+                        is_published=True,
+                    ).only("name"),
+                ),
+            )
+            .only(
+                "id",
+                "name",
+                "text",
+                "category__name",
+                "itemmainimages__image",
+            )
+            .order_by("category__name")
+        )
+
+
 class Item(core.models.AbstractRootModel):
+    objects = ItemManager()
+
     text = RichTextField(
         verbose_name="текст",
         help_text="Введите описание товара",
@@ -28,7 +82,7 @@ class Item(core.models.AbstractRootModel):
         related_name="items",
     )
     is_on_main = django.db.models.BooleanField(
-        verbose_name="Отобразить на главную",
+        verbose_name="Отобразить на главной",
         default=False,
     )
 

@@ -17,22 +17,7 @@ class StaticURLTests(TestCase):
     @parameterized.expand(
         [
             ("1",),
-            ("12",),
-            ("100",),
-        ],
-    )
-    def test_catalog_endpoints(self, digit):
-        url = django.urls.reverse("catalog:item", kwargs={"item_id": digit})
-        response = self.client.get(url)
-        self.assertEqual(
-            response.status_code,
-            HTTPStatus.OK,
-        )
-
-    @parameterized.expand(
-        [
-            ("1",),
-            ("12",),
+            ("2",),
             ("100",),
         ],
     )
@@ -84,18 +69,90 @@ class ModelsTests(django.test.TestCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.category = catalog.models.Category.objects.create(
+        cls.category_pub = catalog.models.Category.objects.create(
             is_published=True,
             name="хорошие",
             slug="f34vraevr7veu4",
             canonical_name="khoroshie",
         )
-        cls.tag = catalog.models.Tag.objects.create(
+        cls.tag_pub = catalog.models.Tag.objects.create(
             is_published=True,
             name="новое",
             slug="bf3c63gc773gvw543i7v",
             canonical_name="novoe",
         )
+        cls.category_unpub = catalog.models.Category.objects.create(
+            is_published=False,
+            name="не опубликованная категория",
+            slug="dagf34vraevr7veu4",
+            canonical_name="ne opublikovannaya",
+        )
+        cls.tag_unpub = catalog.models.Tag.objects.create(
+            is_published=False,
+            name="не опубликованный тэг",
+            slug="fsbbf3c63gc773gvw543i7v",
+            canonical_name="ne opublikovanniy",
+        )
+        cls.item_pub = catalog.models.Item.objects.create(
+            is_published=True,
+            name="опубликованный товар",
+            text="",
+            category_id=1,
+            is_on_main=True,
+        )
+
+        cls.item_pub2 = catalog.models.Item.objects.create(
+            is_published=True,
+            name="опубликованный товар 2",
+            text="",
+            category_id=1,
+            is_on_main=False,
+        )
+        cls.item_unpub = catalog.models.Item.objects.create(
+            is_published=False,
+            name="не опубликованный товар",
+            text="",
+            category_id=1,
+            is_on_main=False,
+        )
+
+    def test_home_page_correct_show_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        self.assertIn("items", response.context)
+
+    def test_home_page_correct_count_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        items = response.context["items"]
+        self.assertEqual(items.count(), 1)
+
+    def test_list_item_page_correct_show_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse("catalog:item_list"),
+        )
+        self.assertIn("items", response.context)
+
+    def test_list_item_page_correct_count_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse("catalog:item_list"),
+        )
+        items = response.context["items"]
+        self.assertEqual(items.count(), 2)
+
+    def test_item_page_correct_show(self):
+        response = django.test.Client().get(
+            django.urls.reverse("catalog:item", kwargs={"item_id": 1}),
+        )
+        self.assertIn("item", response.context)
+
+    def test_item_page_not_published(self):
+        response = django.test.Client().get(
+            django.urls.reverse("catalog:item", kwargs={"item_id": 3}),
+        )
+        self.assertNotIn("item", response.context)
 
     @parameterized.expand(
         [
@@ -114,7 +171,7 @@ class ModelsTests(django.test.TestCase):
             )
             self.item.full_clean()
             self.item.save()
-            self.item.tags.add(ModelsTests.tag)
+            self.item.tags.add(ModelsTests.tag_pub)
 
         self.assertEqual(
             catalog.models.Item.objects.count(),
@@ -134,11 +191,11 @@ class ModelsTests(django.test.TestCase):
             name=name,
             is_published=True,
             text=text,
-            category=ModelsTests.category,
+            category=ModelsTests.category_pub,
         )
         self.item.full_clean()
         self.item.save()
-        self.item.tags.add(ModelsTests.tag)
+        self.item.tags.add(ModelsTests.tag_pub)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count + 1,

@@ -1,0 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/includes/card_item.css' %}"/>
+<div class="card_item">
+    <div class="card">
+        {% if item.itemmainimages.image.url %}
+        <img src="{{ item.itemmainimages.image.url }}" class="item_image">
+        {% else %}
+        <img src="{% static 'img/logo.jpeg' %}" class="item_image">
+        <span class="badge text-bg-danger">Не настоящее изображение</span>
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.text|safe|truncatewords:10 }}</p>
+            <p class="card-text category_item alert alert-secondary" role="alert">{{ item.category }}</p>
+            <div class="tags">
+                {% for tag in item.tags.all %}
+                <div class="badge text-bg-secondary">{{tag.name}}</div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'catalog:item' item.id %}" class="btn btn-primary">Открыть</a>
+        </div>
+    </div>
+</div>

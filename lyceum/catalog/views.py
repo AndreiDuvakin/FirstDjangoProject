@@ -1,34 +1,17 @@
 from django.http import HttpResponse
+import django.shortcuts
 import django.template.loader
+
+import catalog.models
 
 
 def item_list(request):
     template = django.template.loader.get_template("catalog/item_list.html")
+    items = catalog.models.Item.objects.published()
     return HttpResponse(
         template.render(
             {
-                "products": [
-                    {
-                        "id": "1",
-                        "name": "Корм для кошек",
-                        "description": "Вкусный корм для кошек",
-                    },
-                    {
-                        "id": "2",
-                        "name": "Корм для собак",
-                        "description": "Вкусный корм для собак",
-                    },
-                    {
-                        "id": "3",
-                        "name": "Корм для попугая",
-                        "description": "Вкусный корм для попугая (и голубя)",
-                    },
-                    {
-                        "id": "4",
-                        "name": "Корм для хомячков",
-                        "description": "Вкусный корм для хомячков (и шиншилл)",
-                    },
-                ],
+                "items": items,
             },
             request,
         ),
@@ -37,7 +20,11 @@ def item_list(request):
 
 def item_detail(request, item_id):
     template = django.template.loader.get_template("catalog/item.html")
-    return HttpResponse(template.render({"item_id": item_id}, request))
+    item = django.shortcuts.get_object_or_404(
+        catalog.models.Item.objects.published(),
+        pk=item_id,
+    )
+    return HttpResponse(template.render({"item": item}, request))
 
 
 def repeat_int(request, number):

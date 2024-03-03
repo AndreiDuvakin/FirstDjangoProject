@@ -1,0 +1,17 @@
+.card_item {
+    margin: 0.5vw;
+    width: 15vw;
+    display: flex;
+}
+.item_image {
+    border-radius: 0.3vw;
+}
+.item_image {
+    width: 15vw;
+}
+.category_item {
+    border-radius: 10vw;
+}
+.tags {
+    margin-bottom: 1vw;
+}

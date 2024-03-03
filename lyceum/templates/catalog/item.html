@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<p>Товар:{{item_id}}</p>
+<div class="container">
+    {% include "includes/item_card.html" %}
+</div>
 {% endblock %}

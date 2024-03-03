@@ -2,7 +2,14 @@ header {
     padding: 1vw;
 }
 .header_icon {
-    width: 48px;
-    border-radius: 1vw;
-    padding: 5px;
+    width: 5vw;
+    border-radius: 1.5vw;
+    padding:1vw;
+}
+.row {
+    align-items: center;
+}
+.language_form {
+    display: flex;
+    align-items: center;
 }
