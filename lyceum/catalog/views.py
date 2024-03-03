@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 import django.shortcuts
 import django.template.loader
-from django.utils.text import Truncator
 
 import catalog.models
 
@@ -25,7 +24,6 @@ def item_detail(request, item_id):
         catalog.models.Item.objects.published(),
         pk=item_id,
     )
-    item.text = Truncator(item.text).words(10)
     return HttpResponse(template.render({"item": item}, request))
 
 

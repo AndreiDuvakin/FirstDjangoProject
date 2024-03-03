@@ -10,7 +10,7 @@
         {% endif %}
         <div class="card-body">
             <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.text|safe|truncatewords:10 }}</p>
+            <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
             <p class="card-text category_item alert alert-secondary" role="alert">{{ item.category }}</p>
             <div class="tags">
                 {% for tag in item.tags.all %}
