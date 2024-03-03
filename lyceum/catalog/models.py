@@ -2,6 +2,8 @@ from ckeditor.fields import RichTextField
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+from django.db.models import F
+from django.db.models.functions import Substr
 import django.utils.html
 from sorl.thumbnail import get_thumbnail
 
@@ -18,7 +20,7 @@ class ItemManager(django.db.models.Manager):
                 is_published=True,
                 category__is_published=True,
             )
-            .select_related("category", "itemmainimages")
+            .select_related("category", "main_image")
             .prefetch_related(
                 django.db.models.Prefetch(
                     "tags",
@@ -26,14 +28,19 @@ class ItemManager(django.db.models.Manager):
                         is_published=True,
                     ).only("name"),
                 ),
+                django.db.models.Prefetch(
+                    "images",
+                    queryset=catalog.models.ImagesImages.objects.only("image"),
+                ),
             )
             .only(
                 "id",
                 "name",
                 "text",
                 "category__name",
-                "itemmainimages__image",
+                "main_image__image",
             )
+            .annotate(truncated_text=Substr(F("text"), 1, 1000))
             .order_by("name")
         )
 
@@ -41,7 +48,7 @@ class ItemManager(django.db.models.Manager):
         return (
             self.get_queryset()
             .filter(is_published=True, category__is_published=True)
-            .select_related("category", "itemmainimages")
+            .select_related("category", "main_image")
             .prefetch_related(
                 django.db.models.Prefetch(
                     "tags",
@@ -55,7 +62,7 @@ class ItemManager(django.db.models.Manager):
                 "name",
                 "text",
                 "category__name",
-                "itemmainimages__image",
+                "main_image__image",
             )
             .order_by("category__name")
         )
@@ -75,6 +82,7 @@ class Item(core.models.AbstractRootModel):
         "category",
         help_text="Выберите категорию для товара",
         on_delete=django.db.models.CASCADE,
+        related_name="items",
     )
     tags = django.db.models.ManyToManyField(
         "tag",
@@ -139,6 +147,7 @@ class ItemMainImages(django.db.models.Model):
         on_delete=django.db.models.CASCADE,
         null=True,
         blank=True,
+        related_name="main_image",
     )
 
     def get_image_400x300(self):

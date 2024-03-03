@@ -1,0 +1,27 @@
+.item_image {
+    border-radius: 0.3vw;
+    width: 15vw;
+}
+.category_item {
+    border-radius: 10vw;
+}
+.tags {
+    margin-bottom: 1vw;
+}
+.item_block {
+    height: 50vw;
+}
+.list_images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.list_images::-webkit-scrollbar {
+    height: 0.4vw;
+}
+.list_images::-webkit-scrollbar-thumb {
+    background-color: #939393;
+    border-radius: 5vw;
+}

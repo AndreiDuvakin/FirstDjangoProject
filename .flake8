@@ -17,5 +17,5 @@ exclude =
 plugins =
     flake8-commas
     flake8-import-order
-    flake8-commas
+    flake8-return
 inline-quotes = double

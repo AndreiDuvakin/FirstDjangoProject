@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="{% static 'css/includes/card_item.css' %}"/>
 <div class="card_item">
     <div class="card">
-        {% if item.itemmainimages.image.url %}
-        <img src="{{ item.itemmainimages.image.url }}" class="item_image">
+        {% if item.main_image.image.url %}
+        <img src="{{ item.main_image.image.url }}" class="item_image">
         {% else %}
         <img src="{% static 'img/logo.jpeg' %}" class="item_image">
         <span class="badge text-bg-danger">Не настоящее изображение</span>

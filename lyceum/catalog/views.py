@@ -24,6 +24,8 @@ def item_detail(request, item_id):
         catalog.models.Item.objects.published(),
         pk=item_id,
     )
+    for i in item.images.all():
+        print(i.image)
     return HttpResponse(template.render({"item": item}, request))
 
 

@@ -132,6 +132,38 @@
     }
   },
   {
+    "model": "catalog.itemimages",
+    "pk": 2,
+    "fields": {
+      "image": "media/1670293382_8-kartinkin-net-p-noutbuk-kartinka-dlya-detei-oboi-8.png",
+      "item": 5
+    }
+  },
+  {
+    "model": "catalog.itemimages",
+    "pk": 3,
+    "fields": {
+      "image": "media/v916-nunny-636_1.jpg",
+      "item": 5
+    }
+  },
+  {
+    "model": "catalog.itemimages",
+    "pk": 4,
+    "fields": {
+      "image": "media/v916-nunny-636_1_HW4UwfY.jpg",
+      "item": 5
+    }
+  },
+  {
+    "model": "catalog.itemimages",
+    "pk": 5,
+    "fields": {
+      "image": "media/1670293382_8-kartinkin-net-p-noutbuk-kartinka-dlya-detei-oboi-8_XcYf5Re.png",
+      "item": 5
+    }
+  },
+  {
     "model": "catalog.itemmainimages",
     "pk": 7,
     "fields": {

@@ -1,7 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="container">
-    {% include "includes/item_card.html" %}
+<link rel="stylesheet" href="{% static 'css/catalog/item.css' %}"/>
+<div class="container item_block">
+    {% if item.main_image.image.url %}
+    <img src="{{ item.main_image.image.url }}" class="item_image">
+    {% else %}
+    <img src="{% static 'img/logo.jpeg' %}" class="item_image">
+    <span class="badge text-bg-danger">Не настоящее изображение</span>
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.text|safe }}</p>
+        <p class="card-text category_item alert alert-secondary" role="alert">{{ item.category }}</p>
+        <div class="tags">
+            {% for tag in item.tags.all %}
+            <div class="badge text-bg-secondary">{{tag.name}}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="list_images">
+        {% for image in item.images.all %}
+        <img src="{{ image.image.url }}" class="item_image">
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
