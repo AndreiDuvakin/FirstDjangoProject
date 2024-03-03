@@ -30,7 +30,7 @@ class ItemManager(django.db.models.Manager):
                 ),
                 django.db.models.Prefetch(
                     "images",
-                    queryset=catalog.models.ImagesImages.objects.only("image"),
+                    queryset=catalog.models.ItemImages.objects.only("image"),
                 ),
             )
             .only(
