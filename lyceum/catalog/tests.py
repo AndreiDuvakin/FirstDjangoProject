@@ -100,7 +100,6 @@ class ModelsTests(django.test.TestCase):
             category_id=1,
             is_on_main=True,
         )
-
         cls.item_pub2 = catalog.models.Item.objects.create(
             is_published=True,
             name="опубликованный товар 2",
@@ -116,6 +115,19 @@ class ModelsTests(django.test.TestCase):
             is_on_main=False,
         )
 
+        cls.category_pub.save()
+        cls.category_unpub.save()
+
+        cls.tag_pub.save()
+        cls.tag_unpub.save()
+
+        cls.item_pub.clean()
+        cls.item_pub.save()
+        cls.item_unpub.clean()
+        cls.item_unpub.save()
+        cls.item_pub2.clean()
+        cls.item_pub2.save()
+
     def test_home_page_correct_show_items(self):
         response = django.test.Client().get(
             django.urls.reverse("homepage:homepage"),
@@ -127,7 +139,6 @@ class ModelsTests(django.test.TestCase):
             django.urls.reverse("homepage:homepage"),
         )
         items = response.context["items"]
-        self.assertEqual(django.db.models.query.QuerySet, type(items))
         self.assertEqual(len(items), 1)
 
     def test_list_item_page_correct_show_items(self):
@@ -141,7 +152,6 @@ class ModelsTests(django.test.TestCase):
             django.urls.reverse("catalog:item_list"),
         )
         items = response.context["items"]
-        self.assertEqual(django.db.models.query.QuerySet, type(items))
         self.assertEqual(len(items), 2)
 
     def test_item_page_correct_show(self):

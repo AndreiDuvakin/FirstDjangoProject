@@ -2,8 +2,6 @@ from ckeditor.fields import RichTextField
 import django.core.exceptions
 import django.core.validators
 import django.db.models
-from django.db.models import F
-from django.db.models.functions import Substr
 import django.utils.html
 from sorl.thumbnail import get_thumbnail
 
@@ -40,7 +38,6 @@ class ItemManager(django.db.models.Manager):
                 "category__name",
                 "main_image__image",
             )
-            .annotate(truncated_text=Substr(F("text"), 1, 1000))
             .order_by("name")
         )
 
@@ -148,6 +145,7 @@ class ItemMainImages(django.db.models.Model):
         null=True,
         blank=True,
         related_name="main_image",
+        related_query_name="main_image",
     )
 
     def get_image_400x300(self):
