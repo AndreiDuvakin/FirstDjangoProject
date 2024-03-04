@@ -130,6 +130,22 @@ class ModelsTests(django.test.TestCase):
         cls.item_pub2.clean()
         cls.item_pub2.save()
 
+        cls.item_pub.tags.add(cls.tag_pub.pk)
+
+    def test_home_page_have_tags(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        item = response.context["items"][0]
+        self.assertIn(ModelsTests.tag_pub, item.tags.all())
+
+    def test_home_page_not_have_unpublished_tags(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        item = response.context["items"][0]
+        self.assertNotIn(ModelsTests.tag_unpub, item.tags.all())
+
     def test_home_page_correct_show_items(self):
         response = django.test.Client().get(
             django.urls.reverse("homepage:homepage"),
