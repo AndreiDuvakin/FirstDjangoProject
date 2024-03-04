@@ -18,3 +18,8 @@
     background-color: #939393;   
     border-radius: 5vw;      
 }
+.category_title {
+    font-size: 2vw;
+    width: 100%;
+    text-align: center;
+}

@@ -136,6 +136,23 @@ class ModelsTests(django.test.TestCase):
         )
         self.assertIn("items", response.context)
 
+    def test_home_page_not_contains(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        item = response.context["items"][0].__dict__
+        self.assertNotIn("is_on_main", item)
+        self.assertNotIn("images", item)
+        self.assertNotIn("is_published", item)
+
+    def test_home_page_contains(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        item = response.context["items"][0].__dict__
+        self.assertIn("name", item)
+        self.assertIn("text", item)
+
     def test_home_page_correct_count_items(self):
         response = django.test.Client().get(
             django.urls.reverse("homepage:homepage"),

@@ -2,6 +2,8 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/home/homepage.css' %}"/>
+{% for category, items in items_by_category %}
+<p class="category_title">{{category}}</p>
 <div class="container items_block">
     <div class="list_item">
         {% for item in items %}
@@ -9,4 +11,5 @@
         {% endfor %}
     </div>
 </div>
+{% endfor %}
 {% endblock %}
