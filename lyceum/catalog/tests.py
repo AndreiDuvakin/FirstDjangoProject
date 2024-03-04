@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 import django.core.exceptions
+import django.template.context
 import django.test
 from django.test import Client, TestCase
 import django.urls
@@ -153,6 +154,14 @@ class ModelsTests(django.test.TestCase):
         )
         items = response.context["items"]
         self.assertEqual(len(items), 2)
+
+    def test_of_type_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse("catalog:item", kwargs={"item_id": 500}),
+        )
+        self.assertEqual(
+            django.template.context.Context, type(response.context),
+        )
 
     def test_item_page_correct_show(self):
         response = django.test.Client().get(
