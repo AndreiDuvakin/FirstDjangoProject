@@ -160,7 +160,8 @@ class ModelsTests(django.test.TestCase):
             django.urls.reverse("catalog:item", kwargs={"item_id": 500}),
         )
         self.assertEqual(
-            django.template.context.Context, type(response.context),
+            django.template.context.Context,
+            type(response.context),
         )
 
     def test_item_page_correct_show(self):
