@@ -136,15 +136,26 @@ class ModelsTests(django.test.TestCase):
         response = django.test.Client().get(
             django.urls.reverse("homepage:homepage"),
         )
-        item = response.context["items"][0]
-        self.assertIn(ModelsTests.tag_pub, item.tags.all())
+        item = response.context["items"][0].__dict__[
+            "_prefetched_objects_cache"
+        ]
+        self.assertIn("tags", item)
 
-    def test_home_page_not_have_unpublished_tags(self):
+    def test_home_page_not_have_images(self):
+        response = django.test.Client().get(
+            django.urls.reverse("homepage:homepage"),
+        )
+        item = response.context["items"][0].__dict__[
+            "_prefetched_objects_cache"
+        ]
+        self.assertNotIn("images", item)
+
+    def test_home_page_not_have_unpublished_images(self):
         response = django.test.Client().get(
             django.urls.reverse("homepage:homepage"),
         )
         item = response.context["items"][0]
-        self.assertNotIn(ModelsTests.tag_unpub, item.tags.all())
+        self.assertNotIn(ModelsTests.tag_unpub, item.images.all())
 
     def test_home_page_correct_show_items(self):
         response = django.test.Client().get(

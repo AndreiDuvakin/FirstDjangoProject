@@ -2,14 +2,14 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/home/homepage.css' %}"/>
-{% for category, items in items_by_category %}
-<p class="category_title">{{category}}</p>
-<div class="container items_block">
+<div class="container">
     <div class="list_item">
         {% for item in items %}
+        {% ifchanged item.category.name %}
+        <p class="category_title">{{item.category.name}}</p>
+        {% endifchanged %}
         {% include "includes/item_card.html" %}
         {% endfor %}
     </div>
 </div>
-{% endfor %}
 {% endblock %}

@@ -26,10 +26,6 @@ class ItemManager(django.db.models.Manager):
                         is_published=True,
                     ).only("name"),
                 ),
-                django.db.models.Prefetch(
-                    "images",
-                    queryset=catalog.models.ItemImages.objects.only("image"),
-                ),
             )
             .only(
                 "id",

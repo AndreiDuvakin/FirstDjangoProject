@@ -22,4 +22,6 @@
     font-size: 2vw;
     width: 100%;
     text-align: center;
+    writing-mode:vertical-rl;
+    transform: rotate(180deg);
 }

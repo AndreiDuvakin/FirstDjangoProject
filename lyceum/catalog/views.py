@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from django.http import HttpResponse
 import django.shortcuts
 import django.template.loader
@@ -9,14 +7,11 @@ import catalog.models
 
 def item_list(request):
     template = django.template.loader.get_template("catalog/item_list.html")
-    items = catalog.models.Item.objects.published()
-    items_by_category = defaultdict(list)
-    for item in items:
-        items_by_category[item.category.name].append(item)
+    items = catalog.models.Item.objects.published().order_by("category__name")
     return HttpResponse(
         template.render(
             {
-                "items_by_category": items_by_category.items(),
+                "items": items,
             },
             request,
         ),
