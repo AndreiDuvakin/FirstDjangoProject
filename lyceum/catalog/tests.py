@@ -4,6 +4,7 @@ import django.core.exceptions
 import django.template.context
 import django.test
 from django.test import Client, TestCase
+from django.test.utils import ContextList
 import django.urls
 from parameterized import parameterized
 
@@ -157,11 +158,11 @@ class ModelsTests(django.test.TestCase):
 
     def test_of_type_in_context(self):
         response = django.test.Client().get(
-            django.urls.reverse("catalog:item", kwargs={"item_id": 500}),
+            django.urls.reverse("catalog:item", kwargs={"item_id": 1}),
         )
-        self.assertEqual(
-            django.template.context.Context,
-            type(response.context),
+        self.assertIsInstance(
+            response.context,
+            ContextList,
         )
 
     def test_item_page_correct_show(self):
