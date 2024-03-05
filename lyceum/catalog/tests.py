@@ -132,18 +132,44 @@ class ModelsTests(django.test.TestCase):
 
         cls.item_pub.tags.add(cls.tag_pub.pk)
 
-    def test_home_page_have_tags(self):
+    @parameterized.expand(
+        [
+            [
+                "catalog",
+                "new_items",
+            ],
+            ["catalog", "unverified_items"],
+            [
+                "homepage",
+                "homepage",
+            ],
+        ],
+    )
+    def test_unverified_page_have_tags(self, app, view_name):
         response = django.test.Client().get(
-            django.urls.reverse("homepage:homepage"),
+            django.urls.reverse(f"{app}:{view_name}"),
         )
         item = response.context["items"][0].__dict__[
             "_prefetched_objects_cache"
         ]
         self.assertIn("tags", item)
 
-    def test_home_page_not_have_images(self):
+    @parameterized.expand(
+        [
+            [
+                "catalog",
+                "new_items",
+            ],
+            ["catalog", "unverified_items"],
+            [
+                "homepage",
+                "homepage",
+            ],
+        ],
+    )
+    def test_home_page_not_have_images(self, app, view_name):
         response = django.test.Client().get(
-            django.urls.reverse("homepage:homepage"),
+            django.urls.reverse(f"{app}:{view_name}"),
         )
         item = response.context["items"][0].__dict__[
             "_prefetched_objects_cache"
@@ -157,9 +183,26 @@ class ModelsTests(django.test.TestCase):
         item = response.context["items"][0]
         self.assertNotIn(ModelsTests.tag_unpub, item.images.all())
 
-    def test_home_page_correct_show_items(self):
+    @parameterized.expand(
+        [
+            [
+                "catalog",
+                "new_items",
+            ],
+            [
+                "catalog",
+                "friday_items",
+            ],
+            ["catalog", "unverified_items"],
+            [
+                "homepage",
+                "homepage",
+            ],
+        ],
+    )
+    def test_home_page_correct_show_items(self, app, view_name):
         response = django.test.Client().get(
-            django.urls.reverse("homepage:homepage"),
+            django.urls.reverse(f"{app}:{view_name}"),
         )
         self.assertIn("items", response.context)
 

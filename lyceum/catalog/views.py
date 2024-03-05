@@ -66,9 +66,7 @@ def friday_items(request):
 
 def unverified_items(request):
     template = django.template.loader.get_template("catalog/item_list.html")
-    items = catalog.models.Item.objects.published().filter(
-        created_date=django.db.models.F("updated_date"),
-    )
+    items = catalog.models.Item.objects.published()
     return HttpResponse(
         template.render(
             {"items": items, "title": "Непроверенное"},
