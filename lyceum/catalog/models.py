@@ -86,8 +86,13 @@ class Item(core.models.AbstractRootModel):
         verbose_name="Отобразить на главной",
         default=False,
     )
-    created_date = django.db.models.DateTimeField(auto_now_add=True)
-    updated_date = django.db.models.DateTimeField(auto_now=True)
+    created_date = django.db.models.DateTimeField(
+        auto_now_add=True,
+        null=True
+    )
+    updated_date = django.db.models.DateTimeField(
+        auto_now=True
+    )
 
     class Meta:
         verbose_name = "товар"
