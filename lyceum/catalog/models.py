@@ -114,7 +114,8 @@ class ItemImages(django.db.models.Model):
 
     def download_images(self):
         return django.utils.html.mark_safe(
-            f'<a href="/media/{self.image}" download>Скачать изображение</a>',
+            f'<a href="/download/{self.image}" '
+            f"download>Скачать изображение</a>",
         )
 
     def image_tmb(self):
@@ -153,7 +154,7 @@ class ItemMainImages(django.db.models.Model):
 
     def download_images(self):
         return django.utils.html.mark_safe(
-            f'<a href="/media/{self.image}" '
+            f'<a href="/download/{self.image}" '
             f"download>Скачать главное изображение</a>",
         )
 
