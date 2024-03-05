@@ -88,10 +88,11 @@ class Item(core.models.AbstractRootModel):
     )
     created_date = django.db.models.DateTimeField(
         auto_now_add=True,
-        null=True
+        null=True,
     )
     updated_date = django.db.models.DateTimeField(
-        auto_now=True
+        auto_now=True,
+        null=True,
     )
 
     class Meta:
