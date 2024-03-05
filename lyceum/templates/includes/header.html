@@ -29,6 +29,11 @@
             <li class="nav-item">
                 <a class="nav-link {% if view_name == 'about:about' %} active {% endif %}" href="{% url 'about:about' %}">{% trans "О проекте" %}</a>
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">{% trans "Админка" %}</a>
+            </li>
+            {% endif %}
             {% endwith %}
         </ul>
     </div>

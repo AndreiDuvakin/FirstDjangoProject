@@ -1,4 +1,5 @@
 from django.contrib import admin
+import django.utils.html
 
 import catalog.models
 
@@ -19,6 +20,22 @@ class ItemAdmin(admin.ModelAdmin):
         if img:
             return img.image_tmb()
         return "Изображения нет"
+
+    def download_main_image(self, obj):
+        img = catalog.models.ItemMainImages.objects.filter(item=obj.id).first()
+        if img:
+            return img.download_images()
+        return "Изображения нет"
+
+    def download_images(self, obj):
+        imgs = catalog.models.ItemImages.objects.filter(item=obj.id)
+        if imgs:
+            return django.utils.html.mark_safe(
+                "<br>".join(image.download_images() for image in imgs),
+            )
+        return "Изображения нет"
+
+    readonly_fields = ("download_main_image", "download_images")
 
     list_display = [
         "get_img",

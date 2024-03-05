@@ -37,3 +37,6 @@ msgstr "Русский"
 
 msgid "English"
 msgstr "Английский"
+
+msgid "Admin"
+msgstr "Админка"

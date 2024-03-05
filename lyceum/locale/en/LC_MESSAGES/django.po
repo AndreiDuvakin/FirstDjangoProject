@@ -29,3 +29,6 @@ msgstr "Item List"
 #: templates/includes/header.html:28
 msgid "О проекте"
 msgstr "About project"
+
+msgid "Админка"
+msgstr "Admin"

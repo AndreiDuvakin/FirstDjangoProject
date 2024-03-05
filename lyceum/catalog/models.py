@@ -86,6 +86,8 @@ class Item(core.models.AbstractRootModel):
         verbose_name="Отобразить на главной",
         default=False,
     )
+    created_date = django.db.models.DateTimeField(auto_now_add=True)
+    updated_date = django.db.models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "товар"
@@ -108,6 +110,11 @@ class ItemImages(django.db.models.Model):
             "300x300",
             quality=51,
             crop="center",
+        )
+
+    def download_images(self):
+        return django.utils.html.mark_safe(
+            f'<a href="/media/{self.image}" download>Скачать изображение</a>',
         )
 
     def image_tmb(self):
@@ -143,6 +150,15 @@ class ItemMainImages(django.db.models.Model):
         related_name="main_image",
         related_query_name="main_image",
     )
+
+    def download_images(self):
+        return django.utils.html.mark_safe(
+            f'<a href="/media/{self.image}" '
+            f"download>Скачать главное изображение</a>",
+        )
+
+    download_images.short_description = "Скачать главное изображение"
+    download_images.allow_tags = True
 
     def get_image_400x300(self):
         return get_thumbnail(self.image, "400x300", crop="center", quality=51)
