@@ -26,7 +26,7 @@ class StaticURLTests(TestCase):
         responses = []
         for iteration in range(1, 20):
             responses.append(Client().get(url).content.decode())
-        self.assertIn("Я чайник", responses)
+        self.assertIn("Я кинйач", responses)
 
     def test_off_flip(self):
         url = django.urls.reverse("homepage:coffee")

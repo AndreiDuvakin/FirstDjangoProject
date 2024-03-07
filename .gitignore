@@ -6,6 +6,7 @@
 /.env/
 /.env
 /lyceum/db.sqlite3
+/erd.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -138,3 +139,4 @@ cython_debug/
 /.dev/
 /.prod/
 /.test/
+/er.txt
