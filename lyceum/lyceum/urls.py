@@ -9,6 +9,7 @@ urlpatterns = [
     path("catalog/", include("catalog.urls")),
     path("about/", include("about.urls")),
     path("download/", include("download.urls")),
+    path("feedback/", include("feedback.urls")),
     path("admin/", admin.site.urls),
     path("set-language/", set_language, name="set_language"),
 ]

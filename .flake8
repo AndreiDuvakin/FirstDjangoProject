@@ -1,7 +1,7 @@
 [flake8]
 max-line-length = 80
 import-order-style = google
-application-import-names = catalog, about, core, homepage, lyceum, download
+application-import-names = catalog, about, core, homepage, lyceum, download, feedback
 exclude =
     .git,
     __pycache__,

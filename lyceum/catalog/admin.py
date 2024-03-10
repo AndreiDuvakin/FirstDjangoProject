@@ -16,13 +16,17 @@ class ImagesAdminInline(admin.StackedInline):
 @admin.register(catalog.models.Item)
 class ItemAdmin(admin.ModelAdmin):
     def get_img(self, obj):
-        img = catalog.models.ItemMainImages.objects.filter(item=obj.id).first()
+        img = catalog.models.ItemMainImages.objects.filter(
+            item=obj.id,
+        ).first()
         if img:
             return img.image_tmb()
         return "Изображения нет"
 
     def download_main_image(self, obj):
-        img = catalog.models.ItemMainImages.objects.filter(item=obj.id).first()
+        img = catalog.models.ItemMainImages.objects.filter(
+            item=obj.id,
+        ).first()
         if img:
             return img.download_images()
         return "Изображения нет"

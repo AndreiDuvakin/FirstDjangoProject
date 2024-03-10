@@ -22,18 +22,20 @@ class StaticURLTests(TestCase):
 
     def test_on_flip(self):
         url = django.urls.reverse("homepage:coffee")
+        client = Client()
         settings.ALLOW_REVERSE = True
         responses = []
         for iteration in range(1, 20):
-            responses.append(Client().get(url).content.decode())
+            responses.append(client.get(url).content.decode())
         self.assertIn("Я кинйач", responses)
 
     def test_off_flip(self):
         url = django.urls.reverse("homepage:coffee")
+        client = Client()
         settings.ALLOW_REVERSE = False
         responses = []
         for iteration in range(1, 20):
-            responses.append(Client().get(url).content.decode())
+            responses.append(client.get(url).content.decode())
         self.assertNotIn("Я кинйач", responses)
 
 

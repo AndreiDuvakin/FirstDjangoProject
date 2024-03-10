@@ -42,7 +42,10 @@ class StaticURLTests(TestCase):
         ],
     )
     def test_redigit_endpoint(self, digit):
-        url = django.urls.reverse("catalog:converter", kwargs={"digit": digit})
+        url = django.urls.reverse(
+            "catalog:converter",
+            kwargs={"digit": digit},
+        )
         response = self.client.get(url)
         self.assertEqual(
             response.content.decode(),

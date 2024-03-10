@@ -32,3 +32,6 @@ msgstr "About project"
 
 msgid "Админка"
 msgstr "Admin"
+
+msgid "Отзыв"
+msgstr "Feedback"

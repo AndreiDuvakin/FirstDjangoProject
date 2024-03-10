@@ -238,7 +238,8 @@ class Migration(migrations.Migration):
                 (
                     "tags",
                     models.ManyToManyField(
-                        help_text="Выберите метки для товара", to="catalog.tag"
+                        help_text="Выберите метки для товара",
+                        to="catalog.tag",
                     ),
                 ),
             ],

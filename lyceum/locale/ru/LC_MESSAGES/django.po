@@ -40,3 +40,6 @@ msgstr "Английский"
 
 msgid "Admin"
 msgstr "Админка"
+
+msgid "Feedback"
+msgstr "Отзыв"
