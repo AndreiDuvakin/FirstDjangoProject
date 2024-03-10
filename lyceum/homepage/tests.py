@@ -25,8 +25,9 @@ class StaticURLTests(TestCase):
         client = Client()
         settings.ALLOW_REVERSE = True
         responses = []
-        for iteration in range(1, 20):
+        for _ in range(1, 20):
             responses.append(client.get(url).content.decode())
+
         self.assertIn("Я кинйач", responses)
 
     def test_off_flip(self):
@@ -34,8 +35,9 @@ class StaticURLTests(TestCase):
         client = Client()
         settings.ALLOW_REVERSE = False
         responses = []
-        for iteration in range(1, 20):
+        for _ in range(1, 20):
             responses.append(client.get(url).content.decode())
+
         self.assertNotIn("Я кинйач", responses)
 
 

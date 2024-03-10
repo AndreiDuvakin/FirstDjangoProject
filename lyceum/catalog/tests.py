@@ -330,6 +330,7 @@ class ModelsTests(django.test.TestCase):
             )
             self.cat.full_clean()
             self.cat.save()
+
         self.assertEqual(cat_count, catalog.models.Category.objects.count())
 
     @parameterized.expand(
@@ -369,6 +370,7 @@ class ModelsTests(django.test.TestCase):
             )
             self.tg.full_clean()
             self.tg.save()
+
         self.assertEqual(tag_count, catalog.models.Tag.objects.count())
 
     @parameterized.expand(

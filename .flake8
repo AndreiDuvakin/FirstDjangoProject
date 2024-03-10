@@ -18,4 +18,8 @@ plugins =
     flake8-commas
     flake8-import-order
     flake8-return
+    flake8-quotes
+    flake8-clean-block
+    flake8-expression-complexity
+    flake8-bugbear
 inline-quotes = double

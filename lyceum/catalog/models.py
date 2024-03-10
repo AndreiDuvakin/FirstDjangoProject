@@ -11,7 +11,7 @@ import core.models
 
 class ItemManager(django.db.models.Manager):
     def on_main(self):
-        return (
+        queryset = (
             self.get_queryset()
             .filter(
                 is_on_main=True,
@@ -27,38 +27,38 @@ class ItemManager(django.db.models.Manager):
                     ).only("name"),
                 ),
             )
-            .only(
-                "id",
-                "name",
-                "text",
-                "category__name",
-                "main_image__image",
-            )
-            .order_by("name")
         )
 
+        return queryset.only(
+            "id",
+            "name",
+            "text",
+            "category__name",
+            "main_image__image",
+        ).order_by("name")
+
     def published(self):
-        return (
-            self.get_queryset()
-            .filter(is_published=True, category__is_published=True)
-            .select_related("category", "main_image")
-            .prefetch_related(
-                django.db.models.Prefetch(
-                    "tags",
-                    queryset=catalog.models.Tag.objects.filter(
-                        is_published=True,
-                    ).only("name"),
-                ),
-            )
-            .only(
-                "id",
-                "name",
-                "text",
-                "category__name",
-                "main_image__image",
-            )
-            .order_by("category__name")
+        queryset = self.get_queryset().filter(
+            is_published=True,
+            category__is_published=True,
         )
+        queryset = queryset.select_related("category", "main_image")
+        queryset = queryset.prefetch_related(
+            django.db.models.Prefetch(
+                "tags",
+                queryset=catalog.models.Tag.objects.filter(
+                    is_published=True,
+                ).only("name"),
+            ),
+        )
+
+        return queryset.only(
+            "id",
+            "name",
+            "text",
+            "category__name",
+            "main_image__image",
+        ).order_by("category__name")
 
 
 class Item(core.models.AbstractRootModel):
@@ -129,6 +129,7 @@ class ItemImages(django.db.models.Model):
             return django.utils.html.mark_safe(
                 f'<img scr="{self.image.url}" width=50px>',
             )
+
         return "Нет изображения"
 
     image_tmb.short_description = "превью"
@@ -176,6 +177,7 @@ class ItemMainImages(django.db.models.Model):
                 f'<img src="{self.image.url}"'
                 f' width=50px alt="Ошибка загрузки">',
             )
+
         return "Нет изображения"
 
     image_tmb.short_description = "превью"

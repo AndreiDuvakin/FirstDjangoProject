@@ -7,6 +7,7 @@
 /.env
 /lyceum/db.sqlite3
 /erd.txt
+/lyceum/send_mail
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

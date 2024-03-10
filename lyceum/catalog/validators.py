@@ -12,10 +12,12 @@ class ValidateMustContain:
     def __call__(self, value):
         for i in string.punctuation + "©":
             value = value.replace(i, " ")
+
         value = value.lower().split()
         for word in self.words:
             if word in value:
                 return
+
         raise django.core.exceptions.ValidationError(
             "Значение должно содержать слово превосходно или роскошно",
         )

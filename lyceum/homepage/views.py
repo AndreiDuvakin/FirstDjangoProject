@@ -36,6 +36,7 @@ def echo_submit(request):
     if request.method == "POST":
         text = request.POST.get("text")
         return HttpResponse(text)
+
     return HttpResponseNotAllowed(["POST"])
 
 

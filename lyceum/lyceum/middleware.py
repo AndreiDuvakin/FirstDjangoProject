@@ -20,8 +20,11 @@ class FlipWordMiddleware:
                         resp.append(i[::-1])
                     else:
                         resp.append(i)
+
                 response.content = " ".join(resp).encode()
+
             self.count += 1
+
         return response
 
 

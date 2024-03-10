@@ -38,11 +38,9 @@ class CanonicalNameAbstractModel(django.db.models.Model):
         new_word = word
         for i in range(len(symbols)):
             new_word = new_word.replace(symbols[i], resymbols[i])
-        if (
-            self._meta.model.objects.filter(canonical_name=new_word)
-            .exclude(id=self.id)
-            .exists()
-        ):
+
+        queryset = self._meta.model.objects.filter(canonical_name=new_word)
+        if queryset.exclude(id=self.id).exists():
             raise django.core.exceptions.ValidationError("Такое имя уже есть")
 
     def clean(self, *args, **kwargs):
@@ -56,15 +54,16 @@ class CanonicalNameAbstractModel(django.db.models.Model):
         canon_name_main = self.name.lower()
         for i in "., ?!":
             canon_name_main = canon_name_main.replace(i, "")
+
         for key, value in dangerous_letters.items():
             canon_name_main = canon_name_main.replace(key, value)
+
         canon_name_main = unidecode(canon_name_main)
 
-        if (
-            self._meta.model.objects.filter(canonical_name=canon_name_main)
-            .exclude(id=self.id)
-            .exists()
-        ):
+        queryset = self._meta.model.objects.filter(
+            canonical_name=canon_name_main,
+        )
+        if queryset.exclude(id=self.id).exists():
             raise django.core.exceptions.ValidationError("Такое имя уже есть")
 
         self.canonical_name = canon_name_main

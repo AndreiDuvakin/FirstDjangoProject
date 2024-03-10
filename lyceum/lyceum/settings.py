@@ -16,24 +16,12 @@ USE_I18N = True
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.environ.get("DJANGO_DEBUG", default="false").lower().strip() in (
-    "true",
-    "yes",
-    "1",
-    "y",
-    "t",
-)
+DEBUG = os.environ.get("DJANGO_DEBUG", default="false")
+DEBUG = DEBUG.lower().strip() in ("true", "yes", "1", "y", "t")
 
-ALLOW_REVERSE = os.environ.get(
-    "DJANGO_ALLOW_REVERSE",
-    default="true",
-).lower().strip() in (
-    "true",
-    "yes",
-    "1",
-    "y",
-    "t",
-)
+ALLOW_REVERSE = os.environ.get("DJANGO_ALLOW_REVERSE", default="true")
+ALLOW_REVERSE = ALLOW_REVERSE.lower().strip() in ("true", "yes", "1", "y", "t")
+
 
 DJANGO_MAIL = os.environ.get(
     "DJANGO_MAIL",

@@ -22,9 +22,11 @@ def feedback(request):
         )
         request.session["message"] = "Данные успешно отправлены"
         return redirect("feedback:feedback")
+
     if "message" in request.session:
         context["message"] = request.session["message"]
         del request.session["message"]
+
     return HttpResponse(
         template.render(
             context,
