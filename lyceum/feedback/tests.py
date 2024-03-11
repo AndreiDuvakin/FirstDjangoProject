@@ -46,7 +46,6 @@ class FormTest(TestCase):
             data=form_data,
             follow=True,
         )
-        print(response.context)
         self.assertTrue(response.context["form"].has_error("mail"))
 
     def test_form_in_context(self):

@@ -38,7 +38,10 @@ def echo(request):
 def echo_submit(request):
     if request.method == "POST":
         text = request.POST.get("text")
-        return HttpResponse(text)
+        resp = HttpResponse()
+        resp.status_code = 200
+        resp.content = text
+        return resp
 
     return HttpResponseNotAllowed(["POST"])
 
