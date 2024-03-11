@@ -13,15 +13,17 @@ class FlipWordMiddleware:
         response = self.get_response(request)
         if self.allow_flip:
             if self.count % 10 == 0:
-                cont = response.content.decode().split()
-                resp = []
+                cont = response.content.decode()
+                clean_string = ""
                 for i in cont:
-                    if bool(re.match(r"^[а-я]+$", i.lower())):
-                        resp.append(i[::-1])
-                    else:
-                        resp.append(i)
+                    if bool(re.match(r"^[а-яА-Я ]+$", i)):
+                        clean_string += i
 
-                response.content = " ".join(resp).encode()
+                current_russian_words = clean_string.split()
+                for i in current_russian_words:
+                    cont = cont.replace(i, i[::-1])
+
+                response.content = cont
 
             self.count += 1
 
