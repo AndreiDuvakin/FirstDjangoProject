@@ -24,6 +24,10 @@ class FeedbackForm(django.forms.ModelForm):
             feedback.models.Feedback.mail.field.name: "Введите свою "
             "электронную почту",
         }
+        widgets = {
+            feedback.models.Feedback.text.field.name: django.forms.TextInput,
+            feedback.models.Feedback.mail.field.name: django.forms.TextInput,
+        }
         exclude = [...]
 
 

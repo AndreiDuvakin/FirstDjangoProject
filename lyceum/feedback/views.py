@@ -2,7 +2,7 @@ import django.conf
 from django.contrib import messages
 from django.core.mail import send_mail
 import django.db.models
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.shortcuts import redirect
 import django.template.loader
 
@@ -24,15 +24,13 @@ def feedback(request):
             )
             messages.success(request, "Данные успешно отправлены")
             return redirect("feedback:feedback")
-    elif request.method == "GET":
-        return HttpResponse(
-            template.render(
-                context,
-                request,
-            ),
-        )
 
-    return HttpResponseNotAllowed(["GET", "POST"])
+    return HttpResponse(
+        template.render(
+            context,
+            request,
+        ),
+    )
 
 
 __all__ = []

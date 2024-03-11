@@ -29,9 +29,25 @@ class FormTest(TestCase):
             ["mail", "Введите свою электронную почту"],
         ],
     )
-    def test_fields_help_texts(self, field, help):
+    def test_fields_help_texts(self, field, help_txt):
         help_text = FormTest.form.fields[field].help_text
-        self.assertEqual(help_text, help)
+        self.assertEqual(help_text, help_txt)
+
+    @parameterized.expand(
+        ["dsvservge", "esgaesfew@", "segFSRG@devgreb", "fesgewfew@csefes."],
+    )
+    def test_errors_in_form(self, mail):
+        form_data = {
+            "text": "some text",
+            "mail": mail,
+        }
+        response = django.test.Client().post(
+            django.urls.reverse("feedback:feedback"),
+            data=form_data,
+            follow=True,
+        )
+        print(response.context)
+        self.assertTrue(response.context["form"].has_error("mail"))
 
     def test_form_in_context(self):
         response = django.test.Client().get(
