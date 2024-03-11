@@ -4,10 +4,12 @@
 <link rel="stylesheet" href="{% static 'css/feedback/feedback.css' %}"/>
 <div class="container form_body">
     <h1>Обратная связь</h1>
-    {% if message %}
+    {% if messages %}
+    {% for message in messages %}
     <div class="alert alert-primary message" role="alert">
         {{ message }}
     </div>
+    {% endfor %}
     {% else %}
     <form method="post">
         {% csrf_token %}

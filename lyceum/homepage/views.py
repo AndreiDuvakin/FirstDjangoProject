@@ -27,9 +27,12 @@ def coffee(request):
 
 
 def echo(request):
-    template = django.template.loader.get_template("homepage/echo.html")
-    form = homepage.forms.EchoForm()
-    return HttpResponse(template.render({"form": form}, request))
+    if request.method == "GET":
+        template = django.template.loader.get_template("homepage/echo.html")
+        form = homepage.forms.EchoForm()
+        return HttpResponse(template.render({"form": form}, request))
+
+    return HttpResponseNotAllowed(["GET"])
 
 
 def echo_submit(request):

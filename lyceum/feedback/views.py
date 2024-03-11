@@ -1,7 +1,8 @@
 import django.conf
+from django.contrib import messages
 from django.core.mail import send_mail
 import django.db.models
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect
 import django.template.loader
 
@@ -12,27 +13,26 @@ def feedback(request):
     template = django.template.loader.get_template("feedback/feedback.html")
     form = FeedbackForm(request.POST or None)
     context = {"form": form}
-    if form.is_valid():
-        send_mail(
-            "Feedback",
-            form.cleaned_data.get("text"),
-            django.conf.settings.DJANGO_MAIL,
-            [form.cleaned_data.get("mail")],
-            fail_silently=False,
+    if request.method == "POST":
+        if form.is_valid():
+            send_mail(
+                "Feedback",
+                form.cleaned_data.get("text"),
+                django.conf.settings.DJANGO_MAIL,
+                [form.cleaned_data.get("mail")],
+                fail_silently=False,
+            )
+            messages.success(request, "Данные успешно отправлены")
+            return redirect("feedback:feedback")
+    elif request.method == "GET":
+        return HttpResponse(
+            template.render(
+                context,
+                request,
+            ),
         )
-        request.session["message"] = "Данные успешно отправлены"
-        return redirect("feedback:feedback")
 
-    if "message" in request.session:
-        context["message"] = request.session["message"]
-        del request.session["message"]
-
-    return HttpResponse(
-        template.render(
-            context,
-            request,
-        ),
-    )
+    return HttpResponseNotAllowed(["GET", "POST"])
 
 
 __all__ = []

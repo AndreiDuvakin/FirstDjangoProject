@@ -24,6 +24,7 @@ class FeedbackForm(django.forms.ModelForm):
             feedback.models.Feedback.mail.field.name: "Введите свою "
             "электронную почту",
         }
+        exclude = [...]
 
 
 __all__ = []
