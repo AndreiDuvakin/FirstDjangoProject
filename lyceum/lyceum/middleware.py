@@ -4,26 +4,24 @@ from django.conf import settings
 
 
 class FlipWordMiddleware:
+    count = 0
+
     def __init__(self, get_response):
         self.get_response = get_response
-        self.count = 1
         self.allow_flip = settings.ALLOW_REVERSE
 
     def __call__(self, request):
         response = self.get_response(request)
         if self.allow_flip:
-            if self.count % 10 == 0:
+            self.__class__.count += 1
+            if self.__class__.count == 10:
                 cont = response.content.decode()
-                clean_string = ""
-                for i in cont:
-                    if bool(re.match(r"^[а-яА-Я ]+$", i)):
-                        clean_string += i
+                for m in re.finditer(r"\b[а-яА-ЯЁё]+\b", cont):
+                    start, end = m.start(), m.end()
+                    cont = cont[:start] + cont[start:end][::-1] + cont[end:]
 
-                current_russian_words = clean_string.split()
-                for i in current_russian_words:
-                    cont = cont.replace(i, i[::-1])
-
-                response.content = cont
+                self.__class__.count = 0
+                response.content = cont.encode()
 
             self.count += 1
 
