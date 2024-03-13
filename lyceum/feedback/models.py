@@ -44,11 +44,12 @@ class StatusLog(django.db.models.Model):
         auto_now_add=True,
         verbose_name="Время изменения статуса",
     )
-    old_status = django.db.models.CharField(
+    _from = django.db.models.CharField(
         max_length=20,
         verbose_name="Старый статус",
+        db_column="from",
     )
-    new_status = django.db.models.CharField(
+    to = django.db.models.CharField(
         max_length=20,
         verbose_name="Новый статус",
     )

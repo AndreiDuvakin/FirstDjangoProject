@@ -18,8 +18,8 @@ class FeedbackAdmin(admin.ModelAdmin):
                 feedback.models.StatusLog.objects.create(
                     feedback=obj,
                     user=request.user,
-                    old_status=old_obj.status,
-                    new_status=obj.status,
+                    _from=old_obj.status,
+                    to=obj.status,
                 )
 
         super().save_model(request, obj, form, change)
