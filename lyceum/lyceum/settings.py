@@ -20,7 +20,13 @@ DEBUG = os.environ.get("DJANGO_DEBUG", default="false")
 DEBUG = DEBUG.lower().strip() in ("true", "yes", "1", "y", "t")
 
 ALLOW_REVERSE = os.environ.get("DJANGO_ALLOW_REVERSE", default="true")
-ALLOW_REVERSE = ALLOW_REVERSE.lower().strip() in ("true", "yes", "1", "y", "t")
+ALLOW_REVERSE = ALLOW_REVERSE.lower().strip() in (
+    "true",
+    "yes",
+    "1",
+    "y",
+    "t",
+)
 
 
 DJANGO_MAIL = os.environ.get(

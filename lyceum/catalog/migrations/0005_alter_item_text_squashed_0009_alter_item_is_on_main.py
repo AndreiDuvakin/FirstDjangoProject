@@ -10,7 +10,10 @@ class Migration(migrations.Migration):
 
     replaces = [
         ("catalog", "0005_alter_item_text"),
-        ("catalog", "0006_rename_main_image_itemmainimages_image_and_more"),
+        (
+            "catalog",
+            "0006_rename_main_image_itemmainimages_image_and_more",
+        ),
         ("catalog", "0007_alter_itemimages_options"),
         ("catalog", "0008_item_is_on_main"),
         ("catalog", "0009_alter_item_is_on_main"),

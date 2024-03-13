@@ -65,7 +65,10 @@ class Migration(migrations.Migration):
                 (
                     "canonical_name",
                     models.CharField(
-                        editable=False, max_length=150, null=True, unique=True
+                        editable=False,
+                        max_length=150,
+                        null=True,
+                        unique=True,
                     ),
                 ),
             ],
@@ -152,7 +155,10 @@ class Migration(migrations.Migration):
                 (
                     "canonical_name",
                     models.CharField(
-                        editable=False, max_length=150, null=True, unique=True
+                        editable=False,
+                        max_length=150,
+                        null=True,
+                        unique=True,
                     ),
                 ),
                 (

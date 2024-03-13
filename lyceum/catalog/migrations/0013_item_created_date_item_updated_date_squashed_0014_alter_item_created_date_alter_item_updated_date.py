@@ -7,7 +7,10 @@ class Migration(migrations.Migration):
 
     replaces = [
         ("catalog", "0013_item_created_date_item_updated_date"),
-        ("catalog", "0014_alter_item_created_date_alter_item_updated_date"),
+        (
+            "catalog",
+            "0014_alter_item_created_date_alter_item_updated_date",
+        ),
     ]
 
     dependencies = [

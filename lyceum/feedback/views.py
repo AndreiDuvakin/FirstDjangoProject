@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 import django.template.loader
 
 from feedback.forms import FeedbackForm
+from feedback.models import Feedback
 
 
 def feedback(request):
@@ -15,6 +16,11 @@ def feedback(request):
     context = {"form": form}
     if request.method == "POST":
         if form.is_valid():
+            Feedback.objects.create(
+                sender_name=form.cleaned_data["sender_name"],
+                text=form.cleaned_data["text"],
+                mail=form.cleaned_data["mail"],
+            )
             send_mail(
                 "Feedback",
                 form.cleaned_data.get("text"),

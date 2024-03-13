@@ -8,7 +8,10 @@ class Migration(migrations.Migration):
 
     replaces = [
         ("catalog", "0002_alter_itemimages_image_and_more"),
-        ("catalog", "0003_alter_item_images_alter_item_main_image_and_more"),
+        (
+            "catalog",
+            "0003_alter_item_images_alter_item_main_image_and_more",
+        ),
         ("catalog", "0004_alter_item_images_alter_item_tags"),
     ]
 
