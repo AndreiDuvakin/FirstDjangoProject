@@ -17,13 +17,15 @@ def feedback(request):
         if form.is_valid():
             form_text = form.cleaned_data.get("text")
             form_sender = form.cleaned_data.get("sender_name")
-            form_email = form.cleaned_data.get("email")
-            message_text = f"Sender name: {form_sender}\nText: {form_text}"
+            form_email = form.cleaned_data.get("mail")
+            message_text = f"Привет, {form_sender}\nМы получили твое обращение: {form_text}\n"
+            print(message_text, django.conf.settings.DJANGO_MAIL, form_email)
             send_mail(
-                "Feedback",
-                message_text,
-                django.conf.settings.DJANGO_MAIL,
-                [form_email],
+                subject="Feedback",
+                message=message_text,
+                from_email=django.conf.settings.DJANGO_MAIL,
+                fail_silently=False,
+                recipient_list=[form_email],
             )
             form.save()
             messages.success(request, "Данные успешно отправлены")

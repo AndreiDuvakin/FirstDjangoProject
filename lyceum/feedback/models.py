@@ -9,7 +9,8 @@ class Feedback(django.db.models.Model):
         ("answered", "Ответ дан"),
     ]
 
-    sender_name = django.db.models.TextField(null=True)
+    sender_name = django.db.models.TextField(null=True,
+                                             blank=True)
     text = django.db.models.TextField()
     created_on = django.db.models.DateTimeField(
         auto_now_add=True,
