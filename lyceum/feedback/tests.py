@@ -55,7 +55,7 @@ class FormTest(TestCase):
         form_data = {
             "text": "some text",
             "mail": "some@email.sm",
-            "sender_name": "some name",
+            "name": "some name",
         }
         django.test.Client().post(
             django.urls.reverse("feedback:feedback"),
@@ -74,7 +74,7 @@ class FormTest(TestCase):
         form_data = {
             "text": "some text",
             "mail": "some@email.sm",
-            "sender_name": "some name",
+            "name": "some name",
         }
         response = django.test.Client().post(
             django.urls.reverse("feedback:feedback"),

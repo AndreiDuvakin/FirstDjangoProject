@@ -7,7 +7,7 @@ import feedback.models
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = [
         feedback.models.Feedback.status.field.name,
-        feedback.models.Feedback.sender_name.field.name,
+        feedback.models.Feedback.name.field.name,
     ]
     list_display_links = [feedback.models.Feedback.status.field.name]
 

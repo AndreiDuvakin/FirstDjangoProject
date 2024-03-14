@@ -14,21 +14,21 @@ class FeedbackForm(ModelForm):
         fields = [
             feedback.models.Feedback.text.field.name,
             feedback.models.Feedback.mail.field.name,
-            feedback.models.Feedback.sender_name.field.name,
+            feedback.models.Feedback.name.field.name,
         ]
         labels = {
-            feedback.models.Feedback.sender_name.field.name: "Имя отправителя",
+            feedback.models.Feedback.name.field.name: "Имя отправителя",
             feedback.models.Feedback.text.field.name: "Текст",
             feedback.models.Feedback.mail.field.name: "Почта",
         }
         help_texts = {
-            feedback.models.Feedback.sender_name.field.name: "Введите имя",
+            feedback.models.Feedback.name.field.name: "Введите имя",
             feedback.models.Feedback.text.field.name: "Введите отзыв",
             feedback.models.Feedback.mail.field.name: "Введите свою "
             "электронную почту",
         }
         widgets = {
-            feedback.models.Feedback.sender_name.field.name: TextInput,
+            feedback.models.Feedback.name.field.name: TextInput,
             feedback.models.Feedback.text.field.name: TextInput,
             feedback.models.Feedback.mail.field.name: TextInput,
         }

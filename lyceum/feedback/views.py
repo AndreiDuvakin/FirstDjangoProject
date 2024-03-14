@@ -16,7 +16,7 @@ def feedback(request):
     if request.method == "POST":
         if form.is_valid():
             form_text = form.cleaned_data.get("text")
-            form_sender = form.cleaned_data.get("sender_name")
+            form_sender = form.cleaned_data.get("name")
             form_email = form.cleaned_data.get("mail")
             message_text = (
                 f"Привет, {form_sender}\n"
