@@ -28,6 +28,7 @@ ALLOW_REVERSE = ALLOW_REVERSE.lower().strip() in (
     "t",
 )
 
+AUTH_USER_MODEL = "auth.User"
 
 DJANGO_MAIL = os.environ.get(
     "DJANGO_MAIL",

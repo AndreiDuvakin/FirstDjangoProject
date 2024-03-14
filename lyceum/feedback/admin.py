@@ -23,3 +23,6 @@ class FeedbackAdmin(admin.ModelAdmin):
                 )
 
         super().save_model(request, obj, form, change)
+
+
+__all__ = []

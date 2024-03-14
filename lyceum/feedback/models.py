@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+import django.conf
 import django.db.models
 
 
@@ -35,10 +35,8 @@ class StatusLog(django.db.models.Model):
         verbose_name="Обратная связь",
     )
     user = django.db.models.ForeignKey(
-        User,
+        django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
-        related_name="status_logs",
-        verbose_name="Пользователь",
     )
     timestamp = django.db.models.DateTimeField(
         auto_now_add=True,
