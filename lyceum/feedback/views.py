@@ -18,8 +18,10 @@ def feedback(request):
             form_text = form.cleaned_data.get("text")
             form_sender = form.cleaned_data.get("sender_name")
             form_email = form.cleaned_data.get("mail")
-            message_text = f"Привет, {form_sender}\nМы получили твое обращение: {form_text}\n"
-            print(message_text, django.conf.settings.DJANGO_MAIL, form_email)
+            message_text = (
+                f"Привет, {form_sender}\n"
+                f"Мы получили твое обращение: {form_text}\n"
+            )
             send_mail(
                 subject="Feedback",
                 message=message_text,
