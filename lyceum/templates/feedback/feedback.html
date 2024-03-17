@@ -13,6 +13,10 @@
     {% else %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ feedback_form }}
+        {{ feedback_auther }}
+        {{ feedback_images }}
+        {% comment "" %}
         {% with form=feedback_form %}
             {% include "includes/form.html" %}
         {% endwith %}
@@ -24,6 +28,7 @@
         {% with form=feedback_images %}
             {% include "includes/form.html" %}
         {% endwith %}
+        {% endcomment %}
         <input type="submit" class="btn btn-primary submit_button" value="Отправить">
     </form>
     {% endif %}
