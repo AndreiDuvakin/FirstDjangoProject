@@ -1,5 +1,5 @@
 import django.forms
-from django.forms import ModelForm, TextInput
+from django.forms import TextInput
 
 import feedback.models
 
@@ -15,26 +15,26 @@ class FeedbackAutherForm(BootstrapForm):
     class Meta:
         model = feedback.models.FeedbackAuther
         fields = [
-            feedback.models.Feedback.mail.field.name,
-            feedback.models.Feedback.name.field.name,
+            feedback.models.FeedbackAuther.mail.field.name,
+            feedback.models.FeedbackAuther.name.field.name,
         ]
         labels = {
-            feedback.models.Feedback.name.field.name: "Имя отправителя",
-            feedback.models.Feedback.mail.field.name: "Почта",
+            feedback.models.FeedbackAuther.name.field.name: "Имя отправителя",
+            feedback.models.FeedbackAuther.mail.field.name: "Почта",
         }
         help_texts = {
-            feedback.models.Feedback.name.field.name: "Введите имя",
-            feedback.models.Feedback.mail.field.name: "Введите свою "
-                                                      "электронную почту",
+            feedback.models.FeedbackAuther.name.field.name: "Введите имя",
+            feedback.models.FeedbackAuther.mail.field.name: "Введите свою "
+            "электронную почту",
         }
         widgets = {
-            feedback.models.Feedback.name.field.name: TextInput,
-            feedback.models.Feedback.mail.field.name: TextInput,
+            feedback.models.FeedbackAuther.name.field.name: TextInput,
+            feedback.models.FeedbackAuther.mail.field.name: TextInput,
         }
         exclude = [...]
 
 
-class FeedbackImageForm(ModelForm):
+class FeedbackImageForm(BootstrapForm):
     class Meta:
         model = feedback.models.FeedbackImages
 
@@ -43,15 +43,14 @@ class FeedbackImageForm(ModelForm):
         ]
         help_texts = {
             feedback.models.FeedbackImages.image.field.name: (
-                'При необходимости прикрепите файл'
+                "При необходимости прикрепите файл"
             ),
         }
         widgets = {
             feedback.models.FeedbackImages.image.field.name: (
-                django.forms.ClearableFileInput(
+                django.forms.FileInput(
                     attrs={
-                        "class": "form-control",
-                        "type": "image",
+                        "multiple": True,
                     },
                 )
             ),
@@ -62,13 +61,13 @@ class FeedbackForm(BootstrapForm):
     class Meta:
         model = feedback.models.Feedback
         fields = [
-            feedback.models.Feedback.text,
+            feedback.models.Feedback.text.field.name,
         ]
         labels = {
-            feedback.models.Feedback.text: "Текст отзыва",
+            feedback.models.Feedback.text.field.name: "Текст отзыва",
         }
         help_texts = {
-            feedback.models.Feedback.text: "Введите текст отзыва",
+            feedback.models.Feedback.text.field.name: "Введите текст отзыва",
         }
 
 

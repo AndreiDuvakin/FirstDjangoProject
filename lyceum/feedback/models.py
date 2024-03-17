@@ -2,9 +2,6 @@ import time
 
 import django.conf
 import django.db.models
-from sorl.thumbnail import get_thumbnail
-
-from sorl.thumbnail import get_thumbnail
 
 
 class Feedback(django.db.models.Model):
@@ -34,7 +31,7 @@ class FeedbackAuther(django.db.models.Model):
     feedback = django.db.models.OneToOneField(
         Feedback,
         related_name="auther",
-        on_delete=django.db.models.CASCADE
+        on_delete=django.db.models.CASCADE,
     )
     name = django.db.models.TextField("имя", max_length=50)
     mail = django.db.models.EmailField("электронная почта")
@@ -44,11 +41,17 @@ class FeedbackImages(django.db.models.Model):
     def get_upload_path(self, filename):
         return f"uploads/{self.feedback_id}/{time.time()}_{filename}"
 
-    image = django.db.models.ImageField(upload_to="media", null=True)
+    image = django.db.models.ImageField(
+        upload_to=get_upload_path,
+        null=True,
+        blank=True,
+    )
     feedback = django.db.models.ForeignKey(
         Feedback,
         on_delete=django.db.models.CASCADE,
         related_name="images",
+        null=True,
+        blank=True,
     )
 
     class Meta:

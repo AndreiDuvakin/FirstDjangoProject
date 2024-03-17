@@ -6,15 +6,15 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 import django.template.loader
 
-from feedback.forms import FeedbackForm, FeedbackAutherForm, FeedbackImageForm
-from feedback.models import Feedback, FeedbackAuther, FeedbackImages
+import feedback.forms
+import feedback.models
 
 
-def feedback(request):
+def feedback_view(request):
     template = django.template.loader.get_template("feedback/feedback.html")
-    feedback_form = FeedbackForm(request.POST or None)
-    feedback_auther = FeedbackAutherForm(request.POST or None)
-    feedback_images = FeedbackImageForm(request.POST or None)
+    feedback_form = feedback.forms.FeedbackForm(request.POST or None)
+    feedback_auther = feedback.forms.FeedbackAutherForm(request.POST or None)
+    feedback_images = feedback.forms.FeedbackImageForm(request.POST or None)
     context = {
         "feedback_form": feedback_form,
         "feedback_auther": feedback_auther,
@@ -40,21 +40,22 @@ def feedback(request):
             fail_silently=True,
             recipient_list=[form_email],
         )
-        feedback_item = Feedback.objects.create(
+        feedback_item = feedback.models.Feedback.objects.create(
             **feedback_form.cleaned_data,
         )
         feedback_item.save()
-        FeedbackAuther.objects.create(
+        feedback.models.FeedbackAuther.objects.create(
             feedback=feedback_item,
             **feedback_auther.cleaned_data,
         )
         for image in request.FILES.getlist(
-            FeedbackImages.image.field.name,
+            feedback.models.FeedbackImages.image.field.name,
         ):
-            FeedbackImages.objects.create(
+            feedback.models.FeedbackImages.objects.create(
                 image=image,
                 feedback=feedback_item,
             )
+
         messages.success(request, "Данные успешно отправлены")
         return redirect("feedback:feedback")
 

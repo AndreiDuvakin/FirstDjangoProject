@@ -1,5 +1,5 @@
-import django.contrib.admin
 from django.contrib import admin
+import django.contrib.admin
 
 import feedback.models
 
@@ -7,8 +7,8 @@ import feedback.models
 class FeedbackAuther(django.contrib.admin.TabularInline):
     model = feedback.models.FeedbackAuther
     fields = [
-        feedback.models.FeedbackAuther.name.fields.name,
-        feedback.models.FeedbackAuther.mail.fields.name,
+        feedback.models.FeedbackAuther.name.field.name,
+        feedback.models.FeedbackAuther.mail.field.name,
     ]
     can_delete = False
 
@@ -16,7 +16,7 @@ class FeedbackAuther(django.contrib.admin.TabularInline):
 class FeedbackImages(django.contrib.admin.TabularInline):
     model = feedback.models.FeedbackImages
     fields = [
-        feedback.models.FeedbackImages.field.name,
+        feedback.models.FeedbackImages.image.field.name,
     ]
 
 
