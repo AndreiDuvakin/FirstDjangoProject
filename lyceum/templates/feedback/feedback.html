@@ -11,25 +11,12 @@
     </div>
     {% endfor %}
     {% else %}
-    <form method="post">
+    <form method="post", enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in form %}
-        {% for error in field.errors %}
-        <div class="alert alert-danger">
-            {{ error|escape }}
-        </div>
-        {% endfor %}
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-        {% endfor %}
+        {{ feedback_form }}
+        {{ feedback_auther }}
+        {{ feedback_images }}
         <button type="submit" class="btn btn-primary submit_button">Отправить</button>
-        {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ error|escape }}
-        </div>
-        {% endfor %}
     </form>
     {% endif %}
 </div>
