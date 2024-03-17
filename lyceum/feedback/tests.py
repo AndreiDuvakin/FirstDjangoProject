@@ -39,7 +39,8 @@ class FormTest(TestCase):
         )
 
         self.assertRedirects(
-            response, django.urls.reverse("feedback:feedback"),
+            response,
+            django.urls.reverse("feedback:feedback"),
         )
         self.assertEqual(
             feedback.models.Feedback.objects.count(),
