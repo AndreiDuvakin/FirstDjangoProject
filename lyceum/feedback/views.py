@@ -40,12 +40,10 @@ def feedback_view(request):
             fail_silently=True,
             recipient_list=[form_email],
         )
-        feedback_instance = feedback.models.Feedback.objects.create(
-            **feedback_form.cleaned_data,
-        )
-        feedback_auther_instance = feedback_auther.save(commit=False)
-        feedback_auther_instance.feedback = feedback_instance
-        feedback_auther_instance.save()
+        feedback_instance = feedback_form.save(commit=True)
+        auther_instance = feedback_auther.save(commit=True)
+        feedback_form.instance.auther = feedback_instance
+        auther_instance.save()
         for image in request.FILES.getlist(
             feedback.models.FeedbackImages.image.field.name,
         ):
