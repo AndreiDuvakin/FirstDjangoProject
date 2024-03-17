@@ -1,10 +1,14 @@
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 import django.test
-from django.test import TestCase
+from django.test import override_settings, TestCase
 import django.urls
 from parameterized import parameterized
 
 import feedback.forms
 import feedback.models
+
+MEDIA_TEST = settings.BASE_DIR / "media_test"
 
 
 class FormTest(TestCase):
@@ -12,6 +16,43 @@ class FormTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.form = feedback.forms.FeedbackAutherForm()
+
+    @override_settings(MEDIA_ROOT=MEDIA_TEST)
+    def test_form_file_upload(self) -> None:
+        content = "Test file content".encode()
+        file_upload = SimpleUploadedFile(
+            "file.txt",
+            content,
+            content_type="text/plain",
+        )
+        data = {
+            "text": "some text",
+            "mail": "test@test.com",
+            "image": [file_upload],
+        }
+        feedback_count = feedback.models.Feedback.objects.count()
+        response = self.client.post(
+            django.urls.reverse("feedback:feedback"),
+            data=data,
+            format="multipart",
+            follow=True,
+        )
+
+        self.assertRedirects(
+            response, django.urls.reverse("feedback:feedback"),
+        )
+        self.assertEqual(
+            feedback.models.Feedback.objects.count(),
+            feedback_count + 1,
+        )
+        fdback = feedback.models.Feedback.objects.filter(
+            auther__mail=data["mail"],
+            text=data["text"],
+        ).get()
+        files = list(fdback.images.all())
+        self.assertEqual(len(files), 1)
+        with (MEDIA_TEST / files[0].image.name).open("rb") as f:
+            self.assertEqual(f.read(), content)
 
     @parameterized.expand(
         [

@@ -20,12 +20,12 @@ def feedback_view(request):
         "feedback_auther": feedback_auther,
         "feedback_images": feedback_images,
     }
-    forms = [
-        feedback_form,
-        feedback_images,
-        feedback_auther,
-    ]
-    if request.method == "POST" and all(form.is_valid() for form in forms):
+    if (
+        request.method == "POST"
+        and feedback_form.is_valid()
+        and feedback_auther.is_valid()
+        and feedback_images.is_valid()
+    ):
         form_text = feedback_form.cleaned_data.get("text")
         form_sender = feedback_auther.cleaned_data.get("name")
         form_email = feedback_auther.cleaned_data.get("mail")
@@ -40,20 +40,18 @@ def feedback_view(request):
             fail_silently=True,
             recipient_list=[form_email],
         )
-        feedback_item = feedback.models.Feedback.objects.create(
+        feedback_instance = feedback.models.Feedback.objects.create(
             **feedback_form.cleaned_data,
         )
-        feedback_item.save()
-        feedback.models.FeedbackAuther.objects.create(
-            feedback=feedback_item,
-            **feedback_auther.cleaned_data,
-        )
+        feedback_auther_instance = feedback_auther.save(commit=False)
+        feedback_auther_instance.feedback = feedback_instance
+        feedback_auther_instance.save()
         for image in request.FILES.getlist(
             feedback.models.FeedbackImages.image.field.name,
         ):
             feedback.models.FeedbackImages.objects.create(
                 image=image,
-                feedback=feedback_item,
+                feedback=feedback_instance,
             )
 
         messages.success(request, "Данные успешно отправлены")
