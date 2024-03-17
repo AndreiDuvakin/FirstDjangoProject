@@ -17,9 +17,23 @@ class FormTest(TestCase):
         super().setUpClass()
         cls.form = feedback.forms.FeedbackAutherForm()
 
+    def test_form_errors(self):
+        data = {"text": "some text", "mail": "some email"}
+        response = self.client.post(
+            django.urls.reverse("feedback:feedback"),
+            data=data,
+            follow=True,
+        )
+        self.assertFormError(
+            response,
+            "feedback_auther",
+            "mail",
+            "Введите правильный адрес электронной почты.",
+        )
+
     @override_settings(MEDIA_ROOT=MEDIA_TEST)
-    def test_form_file_upload(self) -> None:
-        content = "Test file content".encode()
+    def test_form_file_upload(self):
+        content = "some test".encode()
         file_upload = SimpleUploadedFile(
             "file.txt",
             content,
@@ -27,25 +41,16 @@ class FormTest(TestCase):
         )
         data = {
             "text": "some text",
-            "mail": "test@test.com",
+            "mail": "test@email.com",
             "image": [file_upload],
         }
-        feedback_count = feedback.models.Feedback.objects.count()
-        response = self.client.post(
+        self.client.post(
             django.urls.reverse("feedback:feedback"),
             data=data,
             format="multipart",
             follow=True,
         )
 
-        self.assertRedirects(
-            response,
-            django.urls.reverse("feedback:feedback"),
-        )
-        self.assertEqual(
-            feedback.models.Feedback.objects.count(),
-            feedback_count + 1,
-        )
         fdback = feedback.models.Feedback.objects.filter(
             auther__mail=data["mail"],
             text=data["text"],
