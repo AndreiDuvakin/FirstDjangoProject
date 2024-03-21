@@ -28,6 +28,16 @@ ALLOW_REVERSE = ALLOW_REVERSE.lower().strip() in (
     "t",
 )
 
+DEFAULT_USER_IS_ACTIVE = os.getenv(
+    "DEFAULT_USER_IS_ACTIVE",
+    default=str(DEBUG),
+).lower() in [
+    "true",
+    "1",
+    "yes",
+    "y",
+]
+
 AUTH_USER_MODEL = "auth.User"
 
 DJANGO_MAIL = os.environ.get(
@@ -43,6 +53,7 @@ INSTALLED_APPS = [
     "download.apps.DownloadConfig",
     "feedback.apps.FeedbackConfig",
     "core.apps.CoreConfig",
+    "users.apps.UsersConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -155,3 +166,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 
 EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+LOGIN_URL = "/users/login/"
+
+LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "/users/login/"

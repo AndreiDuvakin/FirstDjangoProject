@@ -1,0 +1,14 @@
+.auth_block, .form_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.auth_block {
+    height: 40vw;
+
+}
+.input-group {
+    margin: 15px;
+}
+

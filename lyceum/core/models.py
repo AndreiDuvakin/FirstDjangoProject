@@ -1,3 +1,4 @@
+import django.conf
 import django.core.exceptions
 import django.db.models
 from unidecode import unidecode
