@@ -5,19 +5,13 @@
 <div class="auth_block">
     <h2>{{header_title}}</h2>
     <form method="post" class="form_block">
-        {% csrf_token %}
+       {% csrf_token %}
         {% for field in form.visible_fields %}
         <div class="input-group">
-            {% if forloop.counter|divisibleby:2 %}
-            <span class="input-group-text">
-                {{ field.label }}
-            </span>{% endif %}
-            {{ field }}
-            {% if not forloop.counter|divisibleby:2 %}
             <span class="input-group-text">
                 {{ field.label }}
             </span>
-            {% endif %}
+            {{ field }}
             {% if form.is_bound and field.errors %}
             {% for error in field.errors %}
             <div class="invalid-feedback d-block">
