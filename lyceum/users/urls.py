@@ -113,7 +113,7 @@ urlpatterns = [
     path(
         "password_reset_confirm/done/",
         views.PasswordResetCompleteView.as_view(
-            template_name="users/password_reset_complete.html",
+            template_name="users/password_reset_done.html",
             extra_context={
                 "title": "Пароль сброшен",
                 "header_title": "Пароль сброшен",

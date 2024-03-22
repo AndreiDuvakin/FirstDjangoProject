@@ -29,11 +29,9 @@ class Profile(django.db.models.Model):
         verbose_name="аватар пользователя",
         upload_to=get_upload_path,
     )
-    coffee_count = django.db.models.IntegerField(
+    coffee_count = django.db.models.PositiveIntegerField(
+        "количество переходов по /coffee/",
         default=0,
-        validators=[
-            django.core.validators.MinValueValidator(0),
-        ],
     )
 
     def get_image_x300(self):
