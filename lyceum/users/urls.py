@@ -42,7 +42,9 @@ urlpatterns = [
     ),
     path(
         "logout/",
-        views.LogoutView.as_view(),
+        views.LogoutView.as_view(
+            template_name="users/logout.html",
+        ),
         name="logout",
     ),
     path(
@@ -86,7 +88,7 @@ urlpatterns = [
     path(
         "password_reset/done/",
         views.PasswordResetDoneView.as_view(
-            template_name="users/password_reset_done.html",
+            template_name="users/password_reset_complete.html",
             extra_context={
                 "title": "Сброс пароля",
                 "header_title": "Ссылка для изменения "
@@ -111,7 +113,7 @@ urlpatterns = [
     path(
         "password_reset_confirm/done/",
         views.PasswordResetCompleteView.as_view(
-            template_name="users/password_reset_complite.html",
+            template_name="users/password_reset_complete.html",
             extra_context={
                 "title": "Пароль сброшен",
                 "header_title": "Пароль сброшен",
@@ -145,3 +147,5 @@ urlpatterns = [
         name="profile",
     ),
 ]
+
+__all__ = []

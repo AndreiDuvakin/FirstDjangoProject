@@ -2,6 +2,7 @@ import time
 
 import django.conf
 import django.core.exceptions
+import django.core.validators
 import django.db.models
 from sorl.thumbnail import get_thumbnail
 
@@ -28,8 +29,11 @@ class Profile(django.db.models.Model):
         verbose_name="аватар пользователя",
         upload_to=get_upload_path,
     )
-    coffe_count = django.db.models.IntegerField(
+    coffee_count = django.db.models.IntegerField(
         default=0,
+        validators=[
+            django.core.validators.MinValueValidator(0),
+        ],
     )
 
     def get_image_x300(self):

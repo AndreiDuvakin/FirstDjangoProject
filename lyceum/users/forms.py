@@ -35,13 +35,13 @@ class ProfileForm(django.forms.ModelForm):
         fields = [
             model.birthday.field.name,
             model.image.field.name,
-            model.coffe_count.field.name,
+            model.coffee_count.field.name,
         ]
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields["coffe_count"].widget.attrs["readonly"] = True
-        self.fields["coffe_count"].widget.attrs["disabled"] = True
+        self.fields["coffee_count"].widget.attrs["readonly"] = True
+        self.fields["coffee_count"].widget.attrs["disabled"] = True
         self.fields["birthday"].widget = django.forms.SelectDateWidget()
 
         for field in self.visible_fields():

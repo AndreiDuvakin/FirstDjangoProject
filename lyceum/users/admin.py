@@ -9,14 +9,15 @@ admin.site.unregister(user)
 
 
 class ProfileInline(admin.TabularInline):
+    can_delete = False
     model = users.models.Profile
     fields = [
         users.models.Profile.birthday.field.name,
         users.models.Profile.image.field.name,
-        users.models.Profile.coffe_count.field.name,
+        users.models.Profile.coffee_count.field.name,
     ]
     readonly_fields = [
-        users.models.Profile.coffe_count.field.name,
+        users.models.Profile.coffee_count.field.name,
     ]
 
 

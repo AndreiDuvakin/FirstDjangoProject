@@ -20,6 +20,11 @@ def home(request):
 
 
 def coffee(request):
+    if request.user.is_authenticated:
+        user_profile = request.user.profile
+        user_profile.coffee_count += 1
+        user_profile.save()
+
     resp = HttpResponse()
     resp.status_code = 418
     resp.content = "Я чайник"

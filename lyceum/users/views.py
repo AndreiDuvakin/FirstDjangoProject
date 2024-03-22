@@ -47,7 +47,7 @@ def profile(request):
 
     profile_form = users.forms.ProfileForm(
         request.POST or None,
-        # instance=request.user.profile,
+        instance=request.user.profile,
     )
 
     if request.method == "POST":
