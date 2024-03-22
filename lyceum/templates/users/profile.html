@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{ user.username }}: изменить профиль{% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/users/users.css' %}"/>
 <h1>{{ user.username }}</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -43,7 +43,7 @@
     <p> {{ message }} </p>
     {% endfor %}
     {% endif %}
-    <a href="{% url " homepage:coffee" %}">Выпить кофе</a>
-    <button type="submit">Сохранить изменения</button>
+    <a href="{% url "homepage:coffee" %}">Выпить кофе</a>
+    <button class="btn btn-primary" type="submit">Сохранить изменения</button>
 </form>
 {% endblock content %}
